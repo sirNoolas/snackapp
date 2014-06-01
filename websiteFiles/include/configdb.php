@@ -9,21 +9,30 @@
 	{
 		if (!mysql_select_db (DBNAME))
 		{
+			# If it can't select the database: 
 			trigger_error("Could not select the database<br />");
 			exit();
-		}
+		}# End of mysql_select_db IF
 	
 	} else {
+		# If unable to connect to mysql
 		trigger_error("Could not connect to MySQL<br />");
 		exit();
 	}
 	
-	# Delete unwanted data	
+	# Function for escaping the data
 	function escape_data($data)
 	{
+		/* Adress Magic Quotes (a program that automaticly escapes quote marks entered into php code. This can cause errors, and the following code makes sure all escape characters are un-escaped)
+		*/
+		if (ini_get('magic_quotes_gpc'))
+		{
+			$data = stripslashes($data);
+		}
+		
 		if (function_exists('mysql_real_escape_string'))
 		{
-			global $dbc;
+			global $dbc; #Need the connection
 			$data = mysql_real_escape_string(trim($data), $dbc);
 			$data = strip_tags($data);
 			
