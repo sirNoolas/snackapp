@@ -10,13 +10,11 @@
 		if (!mysql_select_db (DBNAME))
 		{
 			# If it can't select the database: 
-			trigger_error("Could not select the database<br />");
 			exit();
 		}# End of mysql_select_db IF
 	
 	} else {
 		# If unable to connect to mysql
-		trigger_error("Could not connect to MySQL<br />");
 		exit();
 	}
 	
