@@ -76,31 +76,39 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '/subpages/index.php';">
-  	         		Mijn Snack-IT
+  	     		<td id="menuitem" onclick="window.location = 'index.php';">
+  	         		Index
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/patat.php';">
+  	         	<td id="menuitem" onclick="window.location = 'patat.php';">
   	         		Patat
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/snacks.php';">
+  	         	<td id="menuitem" onclick="window.location = 'snacks.php';">
   	         		Snacks
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/burgers.php';">
+  	         	<td id="menuitem" onclick="window.location = 'burgers.php';">
   	         		Burgers
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/dranken.php';">
+  	         	<td id="menuitem" onclick="window.location = 'dranken.php';">
   	         		Dranken
   	        	 </td>
   	         	<td id="menuitem">
-  	               		
+  	         		<?php
+  	         			if (isset($_SESSION['userid']) AND (substr($_SERVER['PHP_SELF'], -10) != 'logout.php'))
+  	         			{
+  	         				echo '<b><a href="logout.php">Log uit</a></b>';
+  	         			} else {
+  	         				echo '<b><a href="login.php">log in</a></b>';
+  	         			}
+  	         		?>
+  	         		
   	         	</td>
   			</tr>
   		</table>
 		
 		<div id="main">
-			<div id="bodyleftdiv"><br /><b>Registreren</b><br /><br /></div>
+			<div id="bodyleftdiv"><br /><b>registreren</b><br /><br /></div>
 			<div id="bodyrightdiv"><br /><b>Inloggen</b><br /><br />
-			<form margin="20px" action="./index.php" method="post" autocomplete="on">
+			<form margin="20px" action="../index.php" method="post" autocomplete="on">
   	        	<input type="text" name="email" size="15" maxlength="30" value="Email"/>
   	        	<input type="password" name="password" size="15" maxlength="20" value="Wachtwoord"/>
   	        	<input type="submit" name="submit" value="login"/>

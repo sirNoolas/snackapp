@@ -1,7 +1,11 @@
-# Webalizer V2.01-10 Incremental Data - 05/28/2014 15:49:25
-2014 5 28 15 49 25
-254 110 9 31 5 10 650043 127 17 0
-2 1 89 20 28
+# Webalizer V2.01-10 Incremental Data - 06/04/2014 00:31:45
+2014 6 4 0 31 45
+815 500 7 8 9 13 808618 213 14 0
+1 45 221 1 4
+170 95 174193 2 75 2
+0 0 0 0 0 0
+600 367 607211 7 132 11
+45 38 27214 1 6 1
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
@@ -21,18 +25,15 @@
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
-48 17 82837 2 42 3
-85 44 377718 3 44 4
-27 12 57830 6 15 8
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
-94 37 131658 2 26 2
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
+45 38 27214 6
 0 0 0 0
 0 0 0 0
 0 0 0 0
@@ -41,26 +42,25 @@
 0 0 0 0
 0 0 0 0
 0 0 0 0
-19 9 74177 9
-46 34 342737 14
-100 38 133998 31
-34 11 13573 28
+40 23 108079 12
+151 81 101183 71
+2 1 1030 1
+0 0 0 0
+62 35 120311 19
+2 0 384 0
+0 0 0 0
+4 3 23656 1
 0 0 0 0
 0 0 0 0
+13 9 49744 2
 0 0 0 0
-1 0 461 0
-3 1 1416 2
-0 0 0 0
-0 0 0 0
-2 0 416 2
-18 8 8288 18
-25 9 73724 17
-6 0 1253 6
-0 0 0 0
+147 82 98280 68
+242 144 214767 31
+107 84 63970 2
 0
 0
 0
-110
+500
 0
 0
 0
@@ -71,14 +71,14 @@
 0
 0
 0
-98
+257
 0
 0
 0
 0
 0
-0
-46
+6
+52
 0
 0
 0
@@ -100,138 +100,97 @@
 0
 # -urls- 
 /custinterface.css
-0 14 0 6597 0 0
-/roundcube/program/js/app.js
-0 1 0 32764 0 0
+0 1 0 209 0 0
 /
-0 89 0 44368 16 7
-/roundcube/program/js/common.js
-0 1 0 4977 0 0
-/roundcube/plugins/jqueryui/js/jquery-ui-1.9.1.custom.min.js
-0 1 0 63385 0 0
+0 202 0 154159 13 7
 /header.png
-0 44 0 264052 0 0
-/roundcube/skins/larry/images/filetypes.png
-0 1 0 8895 0 0
-/register.php
-0 1 0 497 0 0
-/roundcube/skins/larry/ui.js
-0 1 0 10109 0 0
-/roundcube/skins/larry/images/splitter.png
-0 1 0 477 0 0
-/roundcube/skins/larry/images/messages.png
-0 1 0 2079 0 0
-/roundcube/skins/larry/images/linen_login.jpg
-0 1 0 10710 0 0
-/custinterface.html
-0 31 0 22657 0 0
-/roundcube/skins/larry/images/roundcube_logo.png
-0 1 0 7560 0 0
-/roundcube/skins/larry/images/selector.png
-0 1 0 522 0 0
-/roundcube/
-0 1 0 2384 0 0
-/roundcube/program/js/jquery.min.js
-0 1 0 33851 0 0
-/stylesheet.css
-0 4 0 1787 0 0
-/roundcube/skins/larry/styles.css
-0 1 0 8974 0 0
-/roundcube/plugins/jqueryui/js/i18n/jquery.ui.datepicker-nl.js
-0 1 0 903 0 0
-/roundcube/skins/larry/images/quota.png
-0 1 0 3965 0 0
-/roundcube/skins/larry/images/favicon.ico
-0 1 0 1128 0 0
-/roundcube/skins/larry/images/addcontact.png
-0 1 0 614 0 0
-/roundcube/skins/larry/images/listicons.png
-0 1 0 25831 0 0
-/roundcube/skins/larry/images/login_shadow.png
-0 1 0 1413 0 0
-/roundcube/skins/larry/images/linen.jpg
-0 1 0 14504 0 0
-/roundcube/plugins/jqueryui/themes/larry/jquery-ui-1.9.1.custom.css
-0 1 0 7583 0 0
-/roundcube/skins/larry/images/watermark.jpg
-0 1 0 5345 0 0
-/roundcube/skins/larry/images/ajaxloader.gif
-0 1 0 1777 0 0
-/roundcube/skins/larry/images/buttons.png
-0 1 0 37039 0 0
-/roundcube/program/js/jstz.min.js
-0 1 0 2102 0 0
+0 1 0 175 0 0
+/cssstylesheets/custinterface.css
+0 82 0 30517 0 0
+/cssstylesheets/header.png
+0 77 0 376715 0 0
+/index2.php
+0 204 0 151135 0 0
+/cssstylesheets/general.css
+0 95 0 32254 0 0
+/cssstylesheets/try.css
+0 95 0 36682 0 0
 # End Of Table - urls
 # -sites- (monthly)
 77.60.181.66
-0 5 3 24185 1 1400667430
+0 40 23 108079 1 1401787968
 /
+80.237.226.73
+0 8 4 4217 0 0
+-
 217.121.74.90
-0 91 35 108624 1 1401273468
-/
-171.25.193.235
-0 2 0 384 1 1400749095
+0 4 3 23452 1 1401834625
 /
 86.95.101.59
-0 51 16 62235 4 1400775703
+0 160 97 151591 4 1401836324
 /
-77.247.181.162
-0 5 3 24516 1 1400748320
+195.37.190.67
+0 15 8 29150 1 1401801688
+/
+82.173.207.132
+0 396 260 302972 5 1401841784
 /
 46.44.170.242
-0 91 49 404163 6 1401267720
-/
-217.121.76.175
-0 3 2 22862 1 1400622788
-/
-194.132.32.42
-0 4 2 2689 1 1400752343
-/custinterface.html
-178.217.187.39
-0 2 0 385 1 1400751062
+0 192 105 189157 2 1401802336
 /
 # End Of Table - sites (monthly)
 # -sites- (daily)
-217.121.74.90
-0 91 35 108624 1 1401273468
-/
-46.44.170.242
-0 3 2 23034 1 1401267720
+82.173.207.132
+0 45 38 27214 1 1401841784
 /
 # End Of Table - sites (daily)
 # -referrers- 
 - (Direct Request)
-0 148
-http://itspixeled.nl/roundcube/
-0 23
-http://itspixeled.nl/custinterface.html
-0 59
+0 383
+http://itspixeled.nl/cssstylesheets/general.css
+0 4
+http://www.itspixeled.nl/cssstylesheets/custinterface.css
+0 3
+http://itspixeled.nl/cssstylesheets/try.css
+0 2
+http://www.itspixeled.nl/index2.php
+0 77
+http://itspixeled.nl/index2.php
+0 123
+http://itspixeled.nl/index.php
+0 2
 http://itspixeled.nl/
-0 19
+0 199
 http://www.itspixeled.nl/
-0 5
+0 22
 # End Of Table - referrers
 # -agents- 
 Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/
-0 13
+0 23
 Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML
-0 120
+0 150
 Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like 
-0 9
-Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.
-0 2
-Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64
-0 5
-Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like 
+0 192
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML
+0 12
+Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/
 0 6
-Opera/9.80 (Windows NT 6.2; U; nl) Presto/2.7.62 Version/11.0
-0 74
-Mozilla/5.0 (Linux; U; Android 4.2.2; nl-nl; GT-I9300 Build/J
-0 3
-Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Triden
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MATMJS; rv:1
+0 4
+Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 F
+0 10
+Mozilla/5.0 (Linux; U; Android 4.0.3; nl-nl; HTC_One_V/2.22.1
+0 4
+Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; MATMJS;
+0 2
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Tri
+0 18
+Mozilla/5.0 (Linux; Android 4.0.3; HTC Sensation Z710e Build/
+0 4
+Mozilla/5.0 (Linux; Android 4.2.2; HUAWEI P6-U06 Build/Huawei
 0 5
-Mozilla/5.0 (iPad; CPU OS 7_0_6 like Mac OS X) AppleWebKit/53
-0 15
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, li
+0 385
 # End Of Table - agents
 # -search strings- 
 # End Of Table - search strings

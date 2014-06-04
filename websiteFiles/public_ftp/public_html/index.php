@@ -2,7 +2,7 @@
 	# initialize session and request cookies -> for keeping the user logged in everywhere on the website
 	session_start();
 	# open database connection and extra security
-	require_once("../../include/configdb.php");	
+	require_once("../include/configdb.php");	
 ?>
 
 <?php
@@ -44,7 +44,7 @@
 				
 				session_regenerate_id();
 				
-				header('Location: index.php');
+				header('Location: ./login/goodlogin.php');
 				mysql_close(); # Close database connection
 				exit();
 			}
@@ -64,10 +64,10 @@
 <html lang="nl">
 
 	<head>
-	<link rel="shortcut icon" href="../cssstylesheets/logo.gif"
+		<link rel="shortcut icon" href="cssstylesheets/logo.gif"
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
-		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
+		<link rel="stylesheet" type="text/css" href="cssstylesheets/general.css">
 	</head>
 	
 	<body>
@@ -76,29 +76,29 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '/subpages/index.php';">
-  	         		Mijn Snack-IT
-  	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/patat.php';">
-  	         		Patat
-  	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/snacks.php';">
-  	         		Snacks
-  	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/burgers.php';">
-  	         		Burgers
-  	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/dranken.php';">
-  	         		Dranken
-  	        	 </td>
-  	         	<td id="menuitem">
-  	               		
-  	         	</td>
+  	     		<td id="menuitem" onclick="window.location = 'index.php';">
+  	        		Index
+  	        	</td>
+  	        	<td id="menuitem" onclick="window.location = 'patat.php';">
+  	        		Patat
+  	        	</td>
+  	        	<td id="menuitem" onclick="window.location = 'snacks.php';">
+  	        		Snacks
+  	        	</td>
+  	        	<td id="menuitem" onclick="window.location = 'burgers.php';">
+  	        		Burgers
+  	        	</td>
+  	        	<td id="menuitem" onclick="window.location = 'dranken.php';">
+  	        		Dranken
+  	        	</td>
+  	        	<td id="menuitem">
+  	        		
+  	       	</td>
   			</tr>
   		</table>
 		
 		<div id="main">
-			<div id="bodyleftdiv"><br /><b>Registreren</b><br /><br /></div>
+			<div id="bodyleftdiv"><br /><b>registreren</b><br /><br /></div>
 			<div id="bodyrightdiv"><br /><b>Inloggen</b><br /><br />
 			<form margin="20px" action="./index.php" method="post" autocomplete="on">
   	        	<input type="text" name="email" size="15" maxlength="30" value="Email"/>
