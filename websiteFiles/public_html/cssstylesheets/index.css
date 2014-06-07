@@ -1,4 +1,4 @@
-body {
+	body {
 		background-color:#efefef;
 		font-family:Arial, Helvetica, sans-serif;
 			
@@ -6,6 +6,10 @@ body {
 	
 	h1 {
 		color: #d22b44;	
+	}
+	
+	#error{
+		color: red;
 	}
 	
 	
@@ -26,8 +30,8 @@ body {
 	header{
 		width: 998px;
 		height: 90px;
-        margin: 0px;
-        padding: 0px;
+     	margin: 0px;
+      padding: 0px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color:#fdfdfd;
@@ -58,13 +62,32 @@ body {
 		height: 40px;
 		text-align: center;
 		color: #000;
-        border-bottom-left-radius: 20px;
+      border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
 		border-style: solid;
 		border-width: 1px;
 		border-top-width: 0px;
 		border-color:#d22b44;
-        background-color: #d22b44;
+      background-color: #fbfbfb;
+		margin: 0px;
+		padding: 0px;
+		border-spacing: 0px;
+		cursor:pointer;
+		font-weight: bold;
+	}
+	
+		#menuitemselected{
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		color: #000;
+      border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		border-style: solid;
+		border-width: 1px;
+		border-top-width: 0px;
+		border-color:#d22b44;
+      background-color: #d22b44;
 		margin: 0px;
 		padding: 0px;
 		border-spacing: 0px;
@@ -72,7 +95,7 @@ body {
 		font-weight: bold;
 	}
 
-	#bodyrightdiv{
+	#login{
 		height: 300px;
 		width: 425px;
 		margin: 20px;
@@ -87,19 +110,49 @@ body {
 		border-radius:25px;
 	}
 	
-	#bodyleftdiv{
+	
+	
+	#register{
 		height: 300px;
 		width: 425px;
 		margin: 20px;
 		margin-left: 50;
 		margin-right: auto;
 		background-color: #efefef;
-		text-align: centre;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
 		border-radius:25px;
 		float:left;
+	}
+	
+	#registerleft{
+		height: 200px;
+		width: 180px;
+		margin: 20px;
+		margin-top: auto;
+		margin-right: auto;
+		background-color: #efefef;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		border-radius:10px;
+		font-size: 134%;
+		float: left;		
+	}
+	
+	#registerright{
+		height: 200px;
+		width: 180px;
+		margin: 20px;
+		margin-top: auto;
+		margin-left: auto;
+		background-color: #efefef;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		border-radius:10px;	
+		float: right;	
 	}
 	
 	#image {

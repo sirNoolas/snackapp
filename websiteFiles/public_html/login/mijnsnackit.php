@@ -3,11 +3,18 @@
 	session_start();
 ?>
 <?php
-	if (!isset($_SESSION[email]))
+	if (!isset($_SESSION[userid]))
 	{
-		header('Location: http://itspixeled.nl/index.php');
+		header('Location: http://itspixeled.nl/login/redirectlogin.php');
 		exit();
-	}
+	} else if (isset($_SESSION[active])) {
+		if ($_SESSION[active] != NULL)
+		{
+			header('Location: http://itspixeled.nl/login/activate.php');
+			exit();
+		}
+		
+	}			
 ?>
 
 <!DOCTYE html>
@@ -48,7 +55,15 @@
   		</table>
 		
 		<div id="main">
-			<b>Je bent ingelogd!</b>
+			<div id="bodyleftdiv"><br /><b>Welkom, [naam]</b></div>
+
+			<div id="bodyrightdiv"><br /><b>Uw bestelling voor [datum vrijdag]</b><br /><br />
+			</div>
+
+<div id="bodyleftdiv"><br /><b>Transacties</b></div>
+
+			<div id="bodyrightdiv"><br /><b>Widget 4</b><br /><br />
+			</div>
         
       </div>
 		

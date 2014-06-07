@@ -2,10 +2,10 @@
 	# initialize session and request cookies -> for keeping the user logged in everywhere on the website
 	session_start();
 	# open database connection and extra security
-	require_once("../../include/configdb.php");	
+	require_once("../../include/configdb.php");
 ?>
 <?php 
-	if (isset($_POST['submitted'])) # Check whether the form has been submitted
+	if (isset($_POST['login_submitted'])) # Check whether the form has been submitted
 	{ 
 		# Check for valid email
 		if (preg_match ('%^[A-Za-z0-9._\%-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$%', stripslashes(trim($_POST['email']))))
@@ -13,6 +13,7 @@
 			$u = escape_data($_POST['email']);
 		} else {
 			$u = FALSE;
+			$error .= "Foutieve invoer: email-adres<br>";
 		}
 		
 		# Check for valid password
@@ -21,18 +22,21 @@
 			$p = escape_data($_POST['password']);
 		} else {
 			$p = FALSE;
+			$error .= "Foutieve invoer: wachtwoord<br>";
 		}
 		
 		if ($u && $p)
 		{																											
-			$query = "SELECT email, first_name, password FROM users WHERE email='$u' AND password='$p'";
-			$result = mysql_query($query) or trigger_error();
+			$query = "SELECT * FROM users WHERE email='$u' AND password=md5('$p')";
+			$result = mysql_query($query) or trigger_error("Error while trying to access database");
 			
-			if (mysql_affected_rows() == 1) {
+			if (mysql_affected_rows() == 1) 
+			{
 				$row = mysql_fetch_array($result, MYSQL_NUM);
 				mysql_free_result($result);
-				$_SESSION['email'] = $row[0];
-				$_SESSION['userid'] = $row[5];
+				$_SESSION['userid'] = $row[0];
+				$_SESSION['email'] = $row[2];
+				$_SESSION['active'] = $row[8];
 				
 				#create second token
 				$tokenId = rand(10000, 9999999);
@@ -41,17 +45,24 @@
 				$_SESSION['token_id'] = $tokenId;
 				
 				session_regenerate_id();
-				
-				header('Location: http://itspixeled.nl/login/mijnsnackit.php');
+				if ($_SESSION[active] == NULL)
+				{
+					header('Location: http://itspixeled.nl/login/mijnsnackit.php');
+				} else {
+					header('Location: http://itspixeled.nl/login/activate.php');
+				}
 				mysql_close(); # Close database connection
 				exit();
 			}
-		} else {	# No math was made
-			header('Location: http://itspixeled.nl/index.php');
+			
+		} else {	# No match was made
+			$error .= "De gebruikersnaam en//of het wachtwoord is fout!<br>";
+			header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
 			mysql_close();
 			exit();
 		}
-		header('Location: http://itspixeled.nl/index.php');
+		
+		header("Location: http://itspixeled.nl/login/redirectlogin.phpx=$error");
 		mysql_close();
 		exit();
 	}
