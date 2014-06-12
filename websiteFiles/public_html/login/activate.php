@@ -4,12 +4,12 @@
 	# open database connection and extra security
 	require_once("../../include/configdb.php");
 	
-	/*if ($_SESSION[active] == NULL)
+	if ($_SESSION[active] == NULL)
 	{ # Redirect
 		header("Location: http://www.itspixeled.nl/login/mijnsnackit.php");
 		mysql_close();
 		exit();
-	}*/
+	}
 ?>
 <?php
 	# Log out user

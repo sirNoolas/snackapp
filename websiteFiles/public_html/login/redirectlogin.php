@@ -18,7 +18,7 @@
 <html lang="nl">
 
 	<head>
-	<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+		<link rel="shortcut icon" href="../cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
@@ -30,22 +30,22 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '/login/mijnsnackit.php';">
+  	     		<td id="menuitem" onClick="window.location = '/login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/patat.php';">
+  	         	<td id="menuitem" onClick="window.location = '/subpages/patat.php';">
   	         		Patat
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = '/subpages/snacks.php';">
   	         		Snacks
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = '/subpages/burgers.php';">
   	         		Burgers
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '/subpages/dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = '/subpages/dranken.php';">
   	         		Dranken
   	        	 </td>
-  	         	<td id="menuitemselected" onclick="window.location = '../index.php';">
+  	         	<td id="menuitemselected" onClick="window.location = '../index.php';">
   	               		Registreren
   	         	</td>
   			</tr>

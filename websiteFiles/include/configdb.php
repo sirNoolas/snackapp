@@ -1,6 +1,6 @@
 <?php
 	DEFINE ('DBUSER', 'riknibc53_dbadm');
-	DEFINE ('DBPW', '4fiAECNn');
+	DEFINE ('DBPW', 'I6ewG8tX');
 	DEFINE ('DBHOST', 'localhost');
 	DEFINE ('DBNAME', 'riknibc53_snackapp');
 	

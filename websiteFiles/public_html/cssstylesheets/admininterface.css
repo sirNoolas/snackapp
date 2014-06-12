@@ -4,34 +4,35 @@
 			
 	}
 	
-	h1 {
-		color: #d22b44;	
-	}
-	
-	#error{
+	#errordiv{
 		color: red;
 	}
 	
+	h1 {
+		color: #d22b44;	
+	}	
 	
 	#main{
-		width: 1000px;
+		width: 998px;
 		height: 970px;
-		margin-top: 10px;
+		margin-top: 0px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color: #fbfbfb;
 		border-style: solid;
 		border-width: 1px;
+		border-top-width: 0px;
 		border-color:#d22b44;
-		border-radius:25px;
+		border-bottom-right-radius: 25px;
+		border-bottom-left-radius: 25px;
 		text-align:center;
 	}
 	
 	header{
 		width: 998px;
 		height: 90px;
-     	margin: 0px;
-      padding: 0px;
+		margin: 0px;
+		padding: 0px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color:#fdfdfd;
@@ -57,18 +58,65 @@
 		
 	}
 	
+	#adminmenu{
+		width: 1000px;
+		height: 30px;
+		padding: 0px;
+		margin: 0px;
+		margin-top: 15px;
+		margin-left: auto;
+		margin-right: auto;
+		border-spacing: 0px;
+	}
+	
+	#adminmenuitem{
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		color: #000;
+      border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+      background-color: #fbfbfb;
+		margin: 0px;
+		padding: 0px;
+		border-spacing: 0px;
+		cursor:pointer;
+		font-weight: bold;
+	}
+	
+	#adminmenuitemselected{
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		color: #000;
+      border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+      background-color: #d22b44;
+		margin: 0px;
+		padding: 0px;
+		border-spacing: 0px;
+		cursor:pointer;
+		font-weight: bold;
+	}
+	
 	#menuitem{
 		width: 100px;
 		height: 40px;
 		text-align: center;
 		color: #000;
-		border-bottom-left-radius: 20px;
+      border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
 		border-style: solid;
 		border-width: 1px;
 		border-top-width: 0px;
 		border-color:#d22b44;
-		background-color: #fbfbfb;
+      background-color: #fbfbfb;
 		margin: 0px;
 		padding: 0px;
 		border-spacing: 0px;
@@ -81,13 +129,13 @@
 		height: 40px;
 		text-align: center;
 		color: #000;
-		border-bottom-left-radius: 20px;
+      border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
 		border-style: solid;
 		border-width: 1px;
 		border-top-width: 0px;
 		border-color:#d22b44;
-		background-color: #d22b44;
+      background-color: #d22b44;
 		margin: 0px;
 		padding: 0px;
 		border-spacing: 0px;
@@ -95,7 +143,7 @@
 		font-weight: bold;
 	}
 
-	#login{
+	#bodyrightdiv{
 		height: 300px;
 		width: 425px;
 		margin: 20px;
@@ -110,15 +158,14 @@
 		border-radius:25px;
 	}
 	
-	
-	
-	#register{
+	#bodyleftdiv{
 		height: 300px;
 		width: 425px;
 		margin: 20px;
 		margin-left: 50;
 		margin-right: auto;
 		background-color: #efefef;
+		text-align: centre;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
@@ -126,43 +173,76 @@
 		float:left;
 	}
 	
-	#registerleft{
-		text-align: right;
+	#internalleft{
 		height: 200px;
 		width: 180px;
-		margin: 30px;
+		margin: 20px;
 		margin-top: auto;
 		margin-right: auto;
 		background-color: #efefef;
-		line-height: 150%;
-		float: left;
-	}
-	
-	#registerright{
-		text-align: left;
-		height: 200px;
-		width: 180px;
-		margin: 30px;
-		margin-top: auto;
-		margin-left: auto;
-		background-color: #efefef;
-		float: right;	}
-	
-	#image {
-		height: 600px;
-		width: 900px;
-		margin-top: 350px;
-		margin-left: 50;
-		margin-right: 50;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
-		border-radius:25px;
-		background-image: url(cafetaria.png);
-		background-repeat: no-repeat;
-		background-position:center center;
-		background-size: 900px 600px;
-			
+		border-radius:10px;
+		float: left;		
+	}
+	
+	#smallfont{
+		font-size: 50%;
+	}
+	
+	#hightext{
+		line-height: 145%;
+	}
+	
+	#internalright{
+		height: 200px;
+		width: 180px;
+		margin: 20px;
+		margin-top: auto;
+		margin-left: auto;
+		background-color: #efefef;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		border-radius:10px;	
+		float: right;	
+	}
+	
+	#producttable {
+		margin: 50px;
+		margin-left: auto;
+		margin-right:auto;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+		border-spacing: 0px;
+	}
+	
+	#productfirstrow {
+		background-color: #d22b44;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		text-align: center;	
+	}
+	
+	#productlefttd{
+		/*width: 400px;*/
+		height: 30px;
+		background-color: #efefef;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		padding-left:30px;	
+	}
+	
+	#productrighttd{
+		/*width: 100px;*/
+		height: 30px;
+		background-color: #efefef;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
 	}
 	
 

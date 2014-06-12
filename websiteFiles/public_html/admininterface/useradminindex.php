@@ -17,9 +17,9 @@
 		}
 	}
 	
-	if ($_SESSION[admin_value] == 1) 
+	if ($_SESSION[admin_value] != 1) 
 	{
-		header('Location: http://itspixeled.nl/admininterface/adminindex.php');
+		header('Location: http://itspixeled.nl/login/mijnsnackit.php');
 		exit();
 	}		
 ?>
@@ -31,7 +31,7 @@
 <link rel="shortcut icon" href="./cssstylesheets/logo.gif"
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
-		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
+		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
@@ -55,9 +55,19 @@
   	         	<td id="menuitem" onclick="window.location = '../subpages/dranken.php';">
   	         		Dranken
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = 'logout.php';">
+  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
+  			</tr>
+  		</table>
+<table id="adminmenu">
+  			<tr>
+  				<td id="adminmenuitem" onclick="window.location = 'adminindex.php';">
+  					Admin index
+  				</td>
+  				<td id="adminmenuitemselected" onclick="window.location = 'useradminindex.php';">
+  					User index
+  				</td>
   			</tr>
   		</table>
 		
