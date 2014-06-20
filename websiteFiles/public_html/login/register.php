@@ -8,7 +8,7 @@
 	if (isset($_POST['register_submitted'])) # Check whether the form has been submitted
 	{ 
 		# Check for valid email
-		if (preg_match ('%^[A-Za-z0-9._\%-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$%', stripslashes(trim($_POST['email']))))
+		if (preg_match ('%^[A-Za-z0-9._\%-]+@(itspixeled|xantes)\.nl$%', stripslashes(trim($_POST['email']))))
 		{
 			$e = escape_data($_POST['email']);
 		} else {
@@ -66,22 +66,27 @@
 			if (mysql_affected_rows() == 1)
 			{
 				$body = "Bedankt voor het registreren bij Xantes Snack-IT. Om uw account te activeren verzoeken wij u op deze link te klikken: \n\n";
-				$body .= "http://www.itspixeled.nl/login/activate.php?x=" . mysql_insert_id() . "&y=$accescode";
+				$body .= "http://www.itspixeled.nl/login/activate.php?x=" . mysql_insert_id() . "&y=$accescode" . "\nMet vriendelijke groet,\nDavid Vonk\nSystem administrator van itspixeled.nl";
 				mail($_POST['email'], 'Registratie bevestiging', $body, 'From:no_reply@itspixeled.nl');
 				$_SESSION['active'] = $accescode;
 				
 				#create second token
 				$tokenId = rand(10000, 9999999);
-				$query2 = "UPDATE users SET tokenid = $tokenId WHERE userid = '$_SESSION[userid]'";
-				$result = mysql_query($query2);
+				$query2 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
+				$result = mysql_query($query2) or trigger_error("Error while trying to access database".mysql_error());
 				$_SESSION['token_id'] = $tokenId;
 				
 				session_regenerate_id();
-			# Print result to user:
-			$error .= "<h2>Uw registratie was succesvol!<h2>";
-			$error .= "<h3>Er is een e-mail verzonden naar het opgegeven adres met een activatie mail.<br>";
-			$error .= "Om gebruik te maken van Snack-IT moet u uw account activeren; klik hiervoor op de link in de mail.<h3>";
-			}
+				# Print result to user:
+				$error .= "<h2>Uw registratie was succesvol!<h2>";
+				$error .= "<h3>Er is een e-mail verzonden naar het opgegeven adres met een activatie mail.<br>";
+				$error .= "Om gebruik te maken van Snack-IT moet u uw account activeren; klik hiervoor op de link in de mail.<h3>";
+			
+			} else if (mysql_affected_rows() > 1){
+				# log error
+				$error .= log_error("More than one row affected after insert-user query");				
+			} #end of log error
+			
 			header("Location: http://www.itspixeled.nl/index.php?x=$error");
 			mysql_close(); # Close database connection
 			exit();

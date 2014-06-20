@@ -1,0 +1,6 @@
+AuthGroupFile /dev/null
+AuthType Basic
+AuthUserFile /home/riknibc53/domains/itspixeled.nl/.htpasswd/public_html/cronjobs/.htpasswd
+AuthName "Cronjobs"
+require valid-user
+AuthType Basic

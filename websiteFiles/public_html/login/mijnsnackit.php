@@ -63,17 +63,51 @@
 		
 		<div id="main">
 			<div id="bodyleftdiv"><br /><b>Welkom, <?php echo $_SESSION[first_name]; ?></b>
-<br />
+			<br />
 			<?php
 				echo "Uw saldo is €";
-echo $_SESSION[saldo];
+				echo $_SESSION[saldo];
 			?></div>
 				
 
 			<div id="bodyrightdiv"><br /><b>Uw bestelling voor [datum vrijdag]</b><br /><br />
 			</div>
 
-			<div id="bodyleftdiv"><br /><b>Transacties</b></div>
+			<div id="bodyleftdiv"><br /><b>Transacties</b>
+				<?php 
+					#init table
+					echo (
+						"<table id=producttable>
+               		 <tr id=productfirstrow>
+                  	 	<td>ID</td>
+                  	 	<td>User ID</td>                  	 	
+                  	   <td>Datum</td>
+                  		<td>Euro</td>							
+								<td>Admin ID</td>	
+							</tr>"
+					);
+					
+					# query for data
+					$query0 = "SELECT * FROM transacties ORDER BY transactie_id DESC LIMIT 7";
+					$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+				
+					# print data to screen
+					while($row = mysql_fetch_array($result)){
+						echo (
+							"<tr>
+								<td id=producttd> $row[0] </td>
+								<td id=producttd> $row[1] </td>
+								<td id=producttd> $row[2] </td>
+								<td id=producttd> $row[3] </td>
+								<td id=producttd> $row[4] </td>
+							</tr>"
+						);
+					}	
+            	echo "</table>";
+            	
+            	mysql_free_result($result);
+				?>
+			</div>
 				
 
 			<div id="bodyrightdiv"><br /><b>Widget 4</b><br /><br />

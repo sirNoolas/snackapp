@@ -53,7 +53,7 @@
 		
 		<div id="main">
 			<?php
-				echo "<b>U bent uitgelogd!</b>";
+				echo "<b><br>U bent uitgelogd!</b><br><br><br><br><br><br><br><br><br>";
 			?>
 
       </div>

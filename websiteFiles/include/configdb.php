@@ -9,12 +9,14 @@
 	{
 		if (!mysql_select_db (DBNAME))
 		{
-			# If it can't select the database: 
+			# If it can't select the database:
+			trigger_error("Could not select database!<br>");
 			exit();
 		}# End of mysql_select_db IF
 	
 	} else {
 		# If unable to connect to mysql
+		trigger_error("Could not connect to mysql!<br>");
 		exit();
 	}
 	
@@ -40,5 +42,29 @@
 		}
 		
 		return $data;
+	}
+	
+	# if a query fails
+	function log_error ($errortolog) 
+	{
+		# Log error to email (no permission to log to server D: )
+		# Get client ip adress
+		if (!empty($_SERVER['HTTP_CLIENT_IP']))
+		{
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+		
+		# Get current time and filelocation
+		$date = date('Y-m-d H:i:s');
+		$location = $_SERVER['PHP_SELF'];
+		$errortolog .= "\nIn '$location'\nTriggered by ip: $ip\nOn: $date";
+			
+		mail("errors@itspixeled.nl", 'itspixeled Error_log message', $errortolog, "From:no_reply@itspixeled.nl");
+		
+		return "Ben jij niet toevallig een hacker?<br>";
 	}
 ?>

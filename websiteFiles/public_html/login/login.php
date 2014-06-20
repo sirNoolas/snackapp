@@ -44,11 +44,12 @@
 				
 				#create second token
 				$tokenId = rand(10000, 9999999);
-				$query2 = "UPDATE users SET tokenid = $tokenId WHERE userid = '$_SESSION[userid]'";
+				$query2 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
 				$result = mysql_query($query2);
 				$_SESSION['token_id'] = $tokenId;
 				
 				session_regenerate_id();
+				
 				if ($_SESSION[active] == NULL)
 				{
 					header('Location: http://itspixeled.nl/login/mijnsnackit.php');
@@ -57,10 +58,21 @@
 				}
 				mysql_close(); # Close database connection
 				exit();
-			}
-			
+				
+			} else if (mysql_affected_rows() > 1){
+				# send log email
+				$error .= log_error("More than one row affected after query");				
+				#end of log error
+				
+			} else {	# No match was made
+				$error .= "De gebruikersnaam en/of het wachtwoord is fout!<br>";
+				header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
+				mysql_close();
+				exit();
+			}		
+				
 		} else {	# No match was made
-			$error .= "De gebruikersnaam en//of het wachtwoord is fout!<br>";
+			$error .= "De gebruikersnaam en/of het wachtwoord is fout!<br>";
 			header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
 			mysql_close();
 			exit();

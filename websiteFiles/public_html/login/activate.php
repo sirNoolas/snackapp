@@ -4,11 +4,14 @@
 	# open database connection and extra security
 	require_once("../../include/configdb.php");
 	
-	if ($_SESSION[active] == NULL)
-	{ # Redirect
-		header("Location: http://www.itspixeled.nl/login/mijnsnackit.php");
-		mysql_close();
-		exit();
+	if (isset($_SESSION[active]))
+	{
+		if ($_SESSION[active] == NULL)
+		{ # Redirect
+			header("Location: http://www.itspixeled.nl");
+			mysql_close();
+			exit();
+		}
 	}
 ?>
 <?php
@@ -24,7 +27,7 @@
 	
 	if (isset($_GET['x']) && isset($_GET['y']))
 	{
-		$x = (int) $_GET['x'];
+		$x = (int) escape_data($_GET['x']);
 		$y = escape_data($_GET['y']);
 		// If $x and $y aren't correct, redirect the user
 		if (($x > 0) && (strlen($y) == 32))
@@ -36,7 +39,7 @@
 				session_regenerate_id();
 				$result_string = "<br><br><h3>Gefeliciteerd: uw account is succesvol geactiveerd. Vanaf nu kunt u inloggen.</h3>";
 			} else {
-				$result_string = "<br><br><p>Uw account kon niet geactiveerd worden. Controleer alstublieft de link of neem contact op met de systeembeheerder.</p>";
+				$result_string = "<br><br><p>Uw account kon niet geactiveerd worden.<br><br><b>De meest waarschijnlijke oorzaak is dat uw account alreeds geactiveerd is.</b><br>Dit kunt u controleren door een inlogpoging te doen. Lukt deze, dan is uw account al geactiveerd en hoeft u verder niets te doen.<br><br>Lukt inloggen niet: Controleer dan alstublieft de link of neem contact op met de systeembeheerder.</p>";
 			}
 		} # end of check for correct IF
 		

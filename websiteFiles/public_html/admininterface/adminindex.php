@@ -8,18 +8,21 @@
 	if (!isset($_SESSION[userid]))
 	{
 		header('Location: http://itspixeled.nl/login/redirectlogin.php');
+		mysql_close();
 		exit();
 	} else if (isset($_SESSION[active])) {
 		if ($_SESSION[active] != NULL)
 		{
 			header('Location: http://itspixeled.nl/login/activate.php');
+			mysql_close();
 			exit();
 		}
 	}
 	
 	if ($_SESSION['admin_value'] != 1)
 	{
-		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');	
+		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');
+		mysql_close();	
 		exit();
 	}
 ?>
@@ -65,6 +68,9 @@
   				<td id="adminmenuitemselected" onclick="window.location = 'adminindex.php';">
   					Admin index
   				</td>
+  				<td id="adminmenuitem" onclick="window.location = 'actionadmin.php';">
+  					Admin acties
+  				</td>
   				<td id="adminmenuitem" onclick="window.location = 'useradminindex.php';">
   					User index
   				</td>
@@ -73,78 +79,81 @@
   				
 		
 		<div id="main">
-			<div id="bodyleftdiv"><br /><b>Saldo van een gebruiker opwaarderen</b>
-				<div id="internalleft">
-					<div id="hightext"><br>
-						E-mail: <br>
-						Voornaam: <br>
-						Opwaarderen met: <br>
-						Admin wachtwoord: <br>
-					</div>
+			<div id="bodyleftdiv"><br /><b>Tabellen openstellen</b><br />
+				<?php 
+					#init table
+					echo (
+						"<table id=producttable>
+               		 <tr id=productfirstrow>
+                  	 	<td>ID</td>
+                  	 	<td>Naam</td>                  	 	
+                  	   <td>Status</td>
+							</tr>"
+					);
 					
-				</div>
-				<div id="internalright">
-					<br>
-					<form margin="20px"  action="./addmoney.php" method="post" autocomplete="on">
-						<input type="text" name="email" size="15" maxlength="30" value="Betreft"/><br>
-						<input type="text" name="first_name" size="15" maxlength="12" value="Betreft"/><br>
-						<input type="text" name="value" size="15" maxlength="12" value="Hoeveelheid"/><br>
-						<input type="password" name="password" size="15" maxlength="20" value="Wachtwoord"/><br>
-						<input type="submit" name="submit_add" value="Toevoegen"/>
-						<input type="hidden" name="money_add" value="TRUE"/>
-					</form>
-				</div>
+					# query for data
+					$query0 = "SELECT * FROM folders ORDER BY folder_id ASC";
+					$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+				
+					# print data to screen
+					while($row = mysql_fetch_array($result)){
+						echo (
+							"<tr>
+								<td id=producttd> $row[0] </td>
+								<td id=producttd> $row[3] </td>
+								<td id=producttd> $row[1] </td>
+								<td id=producttd><a href='./adminactions/updatedb.php?x=$row[0]&y=1'>open</a> or <a href='./adminactions/updatedb.php?x=$row[0]&y=0'>close</a></td>
+							</tr>"
+						);
+					}	
+            	echo "</table>";
+            	
+            	mysql_free_result($result);
+			?>
 			</div>
 
-			<div id="bodyrightdiv"><br />
-			<b>Uw bestelling voor [datum vrijdag]</b><br /><br />
+			<div id="bodyrightdiv"><br /><b>acties</b><br /><br />
+				<ul><li><a href="actionadmin.php">Een tabel toevoegen</a></li>
+				<li><a href="actionadmin.php">Een tabel aanpassen</a></li>
+				<li><a href="actionadmin.php">Saldo van een gebruiker ophogen</a></li>
+				<li><a href="actionadmin.php">Een gebruiker verwijderen</a></li><br>
+				<li><a href="readorders.php">Bestellingen uitlezen</a></li>
+				</ul>
 			</div>
 
 			<div id="bodyleftdiv"><br /><b>Transacties</b>
 				<?php 
-					$query0 = "SELECT * FROM transacties";
+					#init table
+					echo (
+						"<table id=producttable>
+               		 <tr id=productfirstrow>
+                  	 	<td>ID</td>
+                  	 	<td>User ID</td>                  	 	
+                  	   <td>Datum</td>
+                  		<td>Euro</td>							
+								<td>Admin ID</td>	
+							</tr>"
+					);
+					
+					# query for data
+					$query0 = "SELECT * FROM transacties ORDER BY transactie_id DESC LIMIT 7";
 					$result = mysql_query($query0) or trigger_error("Error while trying to access database");
 				
-					# Init array's for later use
-					$basisproductids = array();
-					
-					$productnames = array();
-					$productprices = array();
-
-					$tempproductname = array();
-					$tempproductprice = array();
-					
-					# Get the base_product id's
-					$query1 = "SELECT basis_product_id FROM basis_product WHERE folder_id='$folderid'";
-					$result = mysql_query($query1) or trigger_error("Error while trying to access database");
-					
-					#init table
-					echo "<table id=producttable>
-                    <tr id=productfirstrow>
-                       	<td>User ID</td>
-                        <td>Datum</td>
-						<td>Hoeveelheid</td>
-						<td>Behandelaar ID</td>
-                    </tr>";
-					
-					while($arrayvalue = mysql_fetch_array($result)){
+					# print data to screen
+					while($row = mysql_fetch_array($result)){
 						echo (
 							"<tr>
-								<td id=productlefttd>$arrayvalue[0]</td>
-								<td id=productrighttd>$arrayvalue[1]</td>
-								<td id=productlefttd>$arrayvalue[2]</td>
-								<td id=productlefttd>$arrayvalue[3]</td>
+								<td id=producttd> $row[0] </td>
+								<td id=producttd> $row[1] </td>
+								<td id=producttd> $row[2] </td>
+								<td id=producttd> $row[3] </td>
+								<td id=producttd> $row[4] </td>
 							</tr>"
-						); 
+						);
 					}	
-					mysql_free_result($result);
-				
-					
-					
-            		
-
-            		echo "</table>";
-				
+            	echo "</table>";
+            	
+            	mysql_free_result($result);
 			?>
 			</div>
 
@@ -164,4 +173,8 @@
       </div>
 		
 	</body>
+	<?php
+		mysql_close();
+		exit();
+	?>
 </html>

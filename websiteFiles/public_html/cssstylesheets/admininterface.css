@@ -14,7 +14,7 @@
 	
 	#main{
 		width: 998px;
-		height: 970px;
+		height: 1000px;
 		margin-top: 0px;
 		margin-left: auto;
 		margin-right: auto;
@@ -97,7 +97,7 @@
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
-      background-color: #d22b44;
+      background-color: #68f;
 		margin: 0px;
 		padding: 0px;
 		border-spacing: 0px;
@@ -210,34 +210,23 @@
 	}
 	
 	#producttable {
-		margin: 50px;
+		margin: 20px;
 		margin-left: auto;
 		margin-right:auto;
 		border-style: solid;
 		border-width: 1px;
-		border-color:#d22b44;	
+		border-color: #d22b44;	
 		border-spacing: 0px;
+		text-align: center;
 	}
 	
 	#productfirstrow {
-		background-color: #d22b44;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		text-align: center;	
+		background-color: #e23b54;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;	
 	}
 	
-	#productlefttd{
-		/*width: 400px;*/
-		height: 30px;
-		background-color: #efefef;
-		border-style: solid;
-		border-width: 1px;
-		border-color:#d22b44;
-		padding-left:30px;	
-	}
-	
-	#productrighttd{
-		/*width: 100px;*/
+	#producttd{
 		height: 30px;
 		background-color: #efefef;
 		border-style: solid;
@@ -245,6 +234,7 @@
 		border-color:#d22b44;	
 	}
 	
+	
 
-	a:link {text-decoration:none; color: #000; }
-	a:visited {text-decoration:none; color: #000;}
+	a:link {text-decoration:none; color: #04c; }
+	a:visited {text-decoration:none; color: #04c;}
