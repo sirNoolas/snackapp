@@ -4,6 +4,7 @@
 	#open database connection
 	require_once("../../include/configdb.php");
 ?>
+
 <?php
 	if (!isset($_SESSION[userid]))
 	{
@@ -16,6 +17,7 @@
 		}
 	}			
 ?>
+
 <?php
 	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
 	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
@@ -32,7 +34,7 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+		<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
@@ -44,22 +46,22 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitem" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'patat.php';">
+  	         	<td id="menuitem" onClick="window.location = 'patat.php';">
   	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = 'snacks.php';">
   	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = 'burgers.php';">
   	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitemselected" onclick="window.location = 'dranken.php';">
+  	         	<td id="menuitemselected" onClick="window.location = 'dranken.php';">
   	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -128,19 +130,19 @@
 						# start to write to write to table
 						echo (
 						"<table id=producttable>
-         	           <tr id=productfirstrow>
-         	              	<td>Product</td>
-         	               <td>Prijs</td>
-         	           </tr>"
+         	           		<tr id=productfirstrow>
+         	              		<td>Product</td>
+         	               		<td>Prijs</td>
+         	           		</tr>"
 						);
 						
          	   	for($i = 0; $i < sizeof($productnames); $i++) {
 					  		$iprice = number_format((float)$productprices[$i], 2, ',', '');
          	     		echo (
-         	   			"<tr>
-									<td id=productlefttd>$productnames[$i]</td>
+         	   				"<tr id=\"producttablerow\">
+								<td id=productlefttd>$productnames[$i]</td>
          	     				<td id=productrighttd>$iprice</td>
-								</tr>"
+							</tr>"
 							); 
          	  		}
          	  		echo "</table>";

@@ -15,6 +15,7 @@ body {
 	
 	#main{
 		width: 1000px;
+		height: 970px;
 		margin-top: 10px;
 		margin-left: auto;
 		margin-right: auto;
@@ -143,13 +144,19 @@ body {
 	
 	#producttable {
 		margin: 50px;
-		margin-left: auto;
-		margin-right:auto;
+		margin-right: 25px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;	
 		border-spacing: 0px;
+		float: left;
 	}
+	
+	#producttablerow:hover{
+		background: orange;
+		cursor: pointer;
+	}
+	
 	
 	#productfirstrow {
 		background-color: #d22b44;
@@ -159,9 +166,8 @@ body {
 	}
 	
 	#productlefttd{
-		width: 400px;
+		width: 275px;
 		height: 30px;
-		background-color: #fbfbfb;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
@@ -171,11 +177,78 @@ body {
 	#productrighttd{
 		width: 100px;
 		height: 30px;
-		background-color: #fbfbfb;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;	
 	}
+	
+	#cardtable {
+		margin: 50px;
+		margin-left: 25px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+		border-spacing: 0px;
+		float: right;
+	}
+	
+	#.cardfirstrow {
+		background-color: #d22b44;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		text-align: center;
+		width:375px;	
+	}	
+	
+	#cardlefttd{
+		width: 175px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		padding-left:30px;	
+	}
+	
+	#cardcentretd{
+		width: 100px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+	}	
+	
+	#cardrighttd{
+		width: 100px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+	}	
+	
+	.cardlefttd{
+		width: 175px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		padding-left:30px;	
+	}
+	
+	.cardcentretd{
+		width: 100px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+	}	
+	
+	.cardrighttd{
+		width: 100px;
+		height: 30px;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;	
+	}	
 
 	
 

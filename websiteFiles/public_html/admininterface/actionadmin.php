@@ -23,11 +23,22 @@
 		exit();
 	}
 ?>
-<!DOCTYE html>
+<?php
+	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	$names = array();
+	while ($namerow = mysql_fetch_array($result, MYSQL_NUM))
+	{
+		array_push($names, $namerow[0]);
+	}
+	mysql_free_result($result);
+?>
+<!DOCTYPE html>
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
@@ -39,22 +50,22 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitemselected" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitemselected" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/patat.php';">
-  	         		Patat
+  	         	<td id="menuitem" onClick="window.location = '../subpages/patat.php';">
+  	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/snacks.php';">
-  	         		Snacks
+  	         	<td id="menuitem" onClick="window.location = '../subpages/snacks.php';">
+  	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/burgers.php';">
-  	         		Burgers
+  	         	<td id="menuitem" onClick="window.location = '../subpages/burgers.php';">
+  	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/dranken.php';">
-  	         		Dranken
+  	         	<td id="menuitem" onClick="window.location = '../subpages/dranken.php';">
+  	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -115,19 +126,19 @@
 					</tr>
 					<tr>
 						<td id=producttd> Page </td>
-						<td id=producttd><a href="dbactions/edit.php?type=page">edit</a> or <a href="dbactions/add.php?type=page">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=page">edit</a> a row</td>
 					</tr>
 					<tr>
 						<td id=producttd> Folder </td>
-						<td id=producttd><a href="dbactions/edit.php?type=folder">edit</a> or <a href="dbactions/add.php?type=folder">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=folder">edit</a> or <a href="add.php?type=folder">add</a> a row</td>
 					</tr>
 					<tr>
 						<td id=producttd> Base_product </td>
-						<td id=producttd><a href="dbactions/edit.php?type=base">edit</a> or <a href="dbactions/add.php?type=base">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=base">edit</a> or <a href="add.php?type=base">add</a> a row</td>
 					</tr>
 					<tr>
 						<td id=producttd> Sub_product </td>
-						<td id=producttd><a href="dbactions/edit.php?type=sub">edit</a> or <a href="dbactions/add.php?type=sub">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=sub">edit</a> or <a href="add.php?type=sub">add</a> a row</td>
 					</tr>
 				</table>
 										

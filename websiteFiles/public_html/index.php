@@ -3,7 +3,7 @@
 	session_start();
 ?>
 <?php
-	if (isset($_SESSION[userid]) && isset($_SESSION[active]))
+	if (isset($_SESSION[userid]))
 	{
 		if ($_SESSION[active] == NULL) {
 			header('Location: http://itspixeled.nl/login/mijnsnackit.php');

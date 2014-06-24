@@ -32,7 +32,7 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
@@ -44,22 +44,22 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitem" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'patat.php';">
+  	         	<td id="menuitem" onClick="window.location = 'patat.php';">
   	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = 'snacks.php';">
   	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitemselected" onclick="window.location = 'burgers.php';">
+  	         	<td id="menuitemselected" onClick="window.location = 'burgers.php';">
   	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = 'dranken.php';">
   	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -136,9 +136,10 @@
 						
          	   	for($i = 0; $i < sizeof($productnames); $i++) {
 					  		$iprice = number_format((float)$productprices[$i], 2, ',', '');
-         	     		echo "<tr onMouseOver=\"this.bgColor='#ADADAD'\" onMouseOut=\"this.bgColor=`#efefef'\">
-							 <td id=productlefttd>$productnames[$i]</td>
-         	     			 <td id=productrighttd>$iprice</td></tr>";
+         	     		echo ("<tr id=\"producttablerow\">
+							 	<td id=productlefttd>$productnames[$i]</td>
+         	     			 	<td id=productrighttd>$iprice</td>
+                              </tr>");
 						 
          	  		}
          	  		echo "</table>";

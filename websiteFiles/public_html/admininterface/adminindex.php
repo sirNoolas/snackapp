@@ -26,12 +26,22 @@
 		exit();
 	}
 ?>
-
-<!DOCTYE html>
+<?php
+	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	$names = array();
+	while ($namerow = mysql_fetch_array($result, MYSQL_NUM))
+	{
+		array_push($names, $namerow[0]);
+	}
+	mysql_free_result($result);
+?>
+<!DOCTYPE html>
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
@@ -43,22 +53,22 @@
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitemselected" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitemselected" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/patat.php';">
-  	         		Patat
+  	         	<td id="menuitem" onClick="window.location = '../subpages/patat.php';">
+  	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/snacks.php';">
-  	         		Snacks
+  	         	<td id="menuitem" onClick="window.location = '../subpages/snacks.php';">
+  	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/burgers.php';">
-  	         		Burgers
+  	         	<td id="menuitem" onClick="window.location = '../subpages/burgers.php';">
+  	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/dranken.php';">
-  	         		Dranken
+  	         	<td id="menuitem" onClick="window.location = '../subpages/dranken.php';">
+  	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -136,7 +146,7 @@
 					);
 					
 					# query for data
-					$query0 = "SELECT * FROM transacties ORDER BY transactie_id DESC LIMIT 7";
+					$query0 = "SELECT * FROM transacties ORDER BY transactie_id DESC LIMIT 6";
 					$result = mysql_query($query0) or trigger_error("Error while trying to access database");
 				
 					# print data to screen
