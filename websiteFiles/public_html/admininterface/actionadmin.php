@@ -38,15 +38,14 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="itspixeled.nl"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
@@ -89,9 +88,8 @@
 		<div id="main">
 			<br>
 			<h3>Beste admin:</h3>
-			<p>Alle acties die op deze pagina staan zijn hier appart gezet omdat ze veel invloed hebben op het systeem.<br> 
-			Zorg alstublieft voor correct gebruik, en controlleer altijd de ingevoerde gegevens!</p>
-			<h5>-- David Vonk --</h5>
+			<p>Alle acties die op deze pagina hebben zeer veel invloed op het systeem.<br> 
+			Zorg alstublieft voor correct gebruik, en controleer altijd de ingevoerde gegevens!</p>
 		
 			<!-- upper left -->	
 			<div id="bodyleftdiv"><br /><b>Saldo van een gebruiker opwaarderen</b><br /><br />
@@ -121,27 +119,27 @@
 			<!-- upper right -->
 			<div id="bodyrightdiv"><br /><b>DATABASE wijzigen</b><br /><br />
 				<table id=producttable>
-               <tr id=productfirstrow>
-                 	<td>Naam</td>
+	               <tr id=productfirstrow>
+    	             	<td>Naam</td>
+        	            <td></td>
 					</tr>
 					<tr>
 						<td id=producttd> Page </td>
-						<td id=producttd><a href="edit.php?type=page">edit</a> a row</td>
+						<td id=producttd><a href="edit.php?type=page">Wijzig</a> of <a href="add.php?type=page&request=remove">verwijder</a> rij</td>
 					</tr>
 					<tr>
 						<td id=producttd> Folder </td>
-						<td id=producttd><a href="edit.php?type=folder">edit</a> or <a href="add.php?type=folder">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=folder">Wijzig</a>, <a href="add.php?type=folder&request=remove">verwijder</a> of <a href="add.php?type=folder&request=add">voeg</a> rij toe</td>
 					</tr>
 					<tr>
 						<td id=producttd> Base_product </td>
-						<td id=producttd><a href="edit.php?type=base">edit</a> or <a href="add.php?type=base">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=base">Wijzig</a>, <a href="add.php?type=base&request=remove">verwijder</a> of <a href="add.php?type=base&request=add">voeg</a> rij toe</td>
 					</tr>
 					<tr>
 						<td id=producttd> Sub_product </td>
-						<td id=producttd><a href="edit.php?type=sub">edit</a> or <a href="add.php?type=sub">add</a> a row</td>
+						<td id=producttd><a href="edit.php?type=sub">Wijzig</a>, <a href="add.php?type=sub&request=remove">verwijder</a> of <a href="add.php?type=sub&request=add">voeg</a> rij toe</td>
 					</tr>
-				</table>
-										
+				</table>						
 			</div>
 
 			<!-- lower left -->
@@ -168,7 +166,7 @@
 			</div>
 
 			<!-- lower right -->
-			<div id="bodyrightdiv"><br /><b>TO BE DEFINED</b><br /><br />
+			<div id="bodyrightdiv"><br /><b></b><br /><br />
 			</div>
         
       </div>

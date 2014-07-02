@@ -27,20 +27,74 @@
 	}
 	mysql_free_result($result);
 ?>
+<script>
+var order = [];
 
+function addToCard(productID) {
+	order[window.order.length] = productID;	
+}
+
+function addToTable(x, y){
+	var productName = x;
+	var productPrice = y;
+	
+	var table = document.getElementById('cardtable');
+	var rowCount = table.rows.length;
+	var alreadyCreated = 0;
+
+	for(var i = 0; i < rowCount && alreadyCreated == 0; i++) {
+		var currentRow = table.rows[i];
+		var text = currentRow.cells[0].innerText;
+										
+		if(text == "Product"){
+		}
+		else if(text == productName) {
+			var currentValue = parseInt(currentRow.cells[2].innerText);
+			var newValue = currentValue + 1;
+			currentRow.cells[2].innerText = newValue;
+			alreadyCreated = 1;
+		}
+	}
+	
+	if(alreadyCreated == 0){
+			var row = table.insertRow(-1);
+			var cell1 = row.insertCell(0);
+       		cell1.className ='cardlefttd';
+       		var cell2 = row.insertCell(1);
+        	cell2.className ='cardcentretd';
+        	var cell3 = row.insertCell(2);
+        	cell3.className ='cardrighttd';
+
+			cell1.innerHTML = productName;
+			cell2.innerHTML = parseFloat(Math.round(productPrice * 100) / 100).toFixed(2);;              
+			cell3.innerHTML = 1;
+			
+			alreadyCreated = 1;
+	}
+}
+window.onload = function() {
+	var form = document.getElementById('orderform');
+	form.addEventListener('submit', function(){
+		var arrayField = document.getElementById('array');
+		for (var i = 0; i < order.length; i++) {
+			arrayField.value += order[i];
+			arrayField.value += "-";
+		}
+	});
+}
+</script>
 <!DOCTYE html>
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="../index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
@@ -138,31 +192,16 @@
          	           			</tr>"
 						);
 						
-         	   			for($i = 0; $i < sizeof($productnames); $i++) {
-					  		$iprice = number_format((float)$productprices[$i], 2, ',', '');
+						for($i = 0; $i < sizeof($productnames); $i++) {
+							$iprice = number_format((float)$productprices[$i], 2, '.', '');
 						
-         	     			echo (
-         	   					"<tr id=\"producttablerow\" onclick=\"
-       									 var table = document.getElementById('cardtable');
-       									 var row = table.insertRow(-1);
-
-        								var cell1 = row.insertCell(0);
-       									cell1.id ='cardlefttd';
-       									var cell2 = row.insertCell(1);
-        								cell2.id ='cardcentretd';
-        								var cell3 = row.insertCell(2);
-        								cell3.id ='cardrighttd';
-
-        								cell1.innerHTML = '$productnames[$i]';
-        								cell2.innerHTML = '$iprice';              
-        								cell3.innerHTML = '1';
-
-									\">
-									<td id=productlefttd>$productnames[$i]</td>
-         	     					<td id=productrighttd>$iprice</td>
+							echo (
+								"<tr id='producttablerow' onclick=\"addToTable('{$productnames[$i]}', $iprice);addToCard('{$productids[$i]}');\">
+								<td id=productlefttd>$productnames[$i]</td>
+								<td id=productrighttd>$iprice</td>
 								</tr>"
 							); 
-         	  			}
+						} # End of sizeof FOR
 							
          	  			echo "</table>";
 						
@@ -198,8 +237,11 @@
 				}
 				
 				mysql_close();
-				exit();			
-			?>  
+			?> 
+			<form action="order.php" id="orderform" name="orderform">
+				<input type="hidden" id="array" name="array"/>
+				<button>submit</button>
+			</form>
       </div>
 		
 	</body>

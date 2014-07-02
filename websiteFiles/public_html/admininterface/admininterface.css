@@ -236,5 +236,5 @@
 	
 	
 
-	a:link {text-decoration:none; color: #d22b44; }
-	a:visited {text-decoration:none; color: #d22b44;}
+	a:link {text-decoration:none; color: #d22b44; font-weight:bold;}
+	a:visited {text-decoration:none; color: #d22b44; font-weight:bold;}

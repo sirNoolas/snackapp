@@ -41,15 +41,14 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="../index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
@@ -97,8 +96,9 @@
                		 <tr id=productfirstrow>
                   	 	<td>ID</td>
                   	 	<td>Naam</td>                  	 	
-                  	   <td>Status</td>
-							</tr>"
+                  	   	<td>Status</td>
+						<td></td>
+					 </tr>"
 					);
 					
 					# query for data
@@ -112,7 +112,7 @@
 								<td id=producttd> $row[0] </td>
 								<td id=producttd> $row[3] </td>
 								<td id=producttd> $row[1] </td>
-								<td id=producttd><a href='./adminactions/updatedb.php?x=$row[0]&y=1'>open</a> or <a href='./adminactions/updatedb.php?x=$row[0]&y=0'>close</a></td>
+								<td id=producttd><a href='./adminactions/updatedb.php?x=$row[0]&y=1'>open</a> of <a href='./adminactions/updatedb.php?x=$row[0]&y=0'>sluit</a></td>
 							</tr>"
 						);
 					}	
@@ -122,27 +122,26 @@
 			?>
 			</div>
 
-			<div id="bodyrightdiv"><br /><b>acties</b><br /><br />
-				<ul><li><a href="actionadmin.php">Een tabel toevoegen</a></li>
-				<li><a href="actionadmin.php">Een tabel aanpassen</a></li>
-				<li><a href="actionadmin.php">Saldo van een gebruiker ophogen</a></li>
-				<li><a href="actionadmin.php">Een gebruiker verwijderen</a></li><br>
-				<li><a href="readorders.php">Bestellingen uitlezen</a></li>
-				</ul>
-			</div>
+			<div id="bodyrightdiv"><br /><b>Acties</b><br /><br />
+				<a href="actionadmin.php">Een tabel toevoegen</a><br />
+				<a href="actionadmin.php">Een tabel aanpassen</a><br />
+				<a href="actionadmin.php">Saldo van een gebruiker ophogen</a><br />
+				<a href="actionadmin.php">Een gebruiker verwijderen</a><br />
+				<a href="readorders.php">Bestellingen uitlezen</a>		
+            </div>
 
 			<div id="bodyleftdiv"><br /><b>Transacties</b>
 				<?php 
 					#init table
 					echo (
 						"<table id=producttable>
-               		 <tr id=productfirstrow>
+               		<tr id=productfirstrow>
                   	 	<td>ID</td>
                   	 	<td>User ID</td>                  	 	
-                  	   <td>Datum</td>
+                  	   	<td>Datum</td>
                   		<td>Euro</td>							
-								<td>Admin ID</td>	
-							</tr>"
+						<td>Admin ID</td>	
+					</tr>"
 					);
 					
 					# query for data

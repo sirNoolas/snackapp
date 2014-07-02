@@ -28,34 +28,33 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="../index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitemselected" onclick="window.location = 'mijnsnackit.php';">
+  	     		<td id="menuitemselected" onClick="window.location = 'mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/patat.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/patat.php';">
   	         		Patat
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/snacks.php';">
   	         		Snacks
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/burgers.php';">
   	         		Burgers
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/dranken.php';">
   	         		Dranken
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = 'logout.php';">
+  	         	<td id="menuitem" onClick="window.location = 'logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -63,14 +62,15 @@
 		
 		<div id="main">
 			<div id="bodyleftdiv"><br /><b>Welkom, <?php echo $_SESSION[first_name]; ?></b>
-			<br />
+			<br /><br />
 			<?php
-				echo "Uw saldo is €";
+				echo "Uw saldo is ";
 				echo $_SESSION[saldo];
+				echo " euro.";
 			?></div>
 				
 
-			<div id="bodyrightdiv"><br /><b>Uw bestelling voor [datum vrijdag]</b><br /><br />
+			<div id="bodyrightdiv"><br /><b>Uw bestelling voor komende vrijdag</b><br /><br />
 			</div>
 
 			<div id="bodyleftdiv"><br /><b>Transacties</b>
@@ -81,9 +81,9 @@
                		 <tr id=productfirstrow>
                   	 	<td>ID</td>
                   	 	<td>User ID</td>                  	 	
-                  	   <td>Datum</td>
+                  	   	<td>Datum</td>
                   		<td>Euro</td>							
-								<td>Admin ID</td>	
+						<td>Admin ID</td>	
 							</tr>"
 					);
 					

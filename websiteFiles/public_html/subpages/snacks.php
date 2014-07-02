@@ -32,34 +32,33 @@
 <html lang="nl">
 
 	<head>
-<link rel="shortcut icon" href="./cssstylesheets/logo.gif"
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="../index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitem" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'patat.php';">
+  	         	<td id="menuitem" onClick="window.location = 'patat.php';">
   	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitemselected" onclick="window.location = 'snacks.php';">
+  	         	<td id="menuitemselected" onClick="window.location = 'snacks.php';">
   	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = 'burgers.php';">
   	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = 'dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = 'dranken.php';">
   	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -145,7 +144,7 @@
          	  		}
          	  		echo "</table>";
 					} else if (((mysql_affected_rows() == 1) && !$status)){
-						echo "<br><h3>Sorry, you can't order!<br>This table is closed for the time being...</h3>If you think this is an error, please contact an admin.";
+						//echo "<br><h3>Sorry, you can't order!<br>This table is closed for the time being...</h3>If you think this is an error, please contact an admin.";
 						
 					} else if (mysql_affected_rows() > 1) {
 					# log error
@@ -157,7 +156,7 @@
 				} # END of main FOR
 				if (sizeof($names) < 1)
 				{
-					echo "<br><h3>Sorry, you can't order!<br>This table is closed for the time being...</h3>If you think this is an error, please contact an admin.<br><br><br>";
+					//echo "<br><h3>Sorry, you can't order!<br>This table is closed for the time being...</h3>If you think this is an error, please contact an admin.<br><br><br>";
 				}
 				mysql_close();
 				exit();			

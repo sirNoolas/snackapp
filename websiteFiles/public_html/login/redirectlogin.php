@@ -18,15 +18,14 @@
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="../cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
 	</head>
 	
 	<body>
-		<header>
-		</header>
+		<a href="../index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
