@@ -8,7 +8,7 @@
 	if (isset($_POST['register_submitted'])) # Check whether the form has been submitted
 	{ 
 		# Check for valid email
-		if (preg_match ('%^[A-Za-z0-9._\%-]+@(itspixeled|xantes)\.nl$%', stripslashes(trim($_POST['email']))))
+		if (preg_match ('%^[A-Za-z0-9._\%-]+@(xantes|itspixeled)\.nl$%', stripslashes(trim($_POST['email']))))
 		{
 			$e = escape_data($_POST['email']);
 		} else {
@@ -66,7 +66,7 @@
 			if (mysql_affected_rows() == 1)
 			{
 				$body = "Bedankt voor het registreren bij Xantes Snack-IT. Om uw account te activeren verzoeken wij u op deze link te klikken: \n\n";
-				$body .= "http://www.itspixeled.nl/login/activate.php?x=" . mysql_insert_id() . "&y=$accescode" . "\nMet vriendelijke groet,\nDavid Vonk\nSystem administrator van itspixeled.nl";
+				$body .= "http://www.itspixeled.nl/login/activate.php?x=" . mysql_insert_id() . "&y=$accescode" . "\nMet vriendelijke groet,\nSystem administrator van Snack-IT";
 				mail($_POST['email'], 'Registratie bevestiging', $body, 'From:no_reply@itspixeled.nl');
 				$_SESSION['active'] = $accescode;
 				
@@ -87,17 +87,17 @@
 				$error .= log_error("More than one row affected after insert-user query");				
 			} #end of log error
 			
-			header("Location: http://www.itspixeled.nl/index.php?x=$error");
+			header("Location: /index.php?x=$error");
 			mysql_close(); # Close database connection
 			exit();
 		} else {
 			$error .= "Your registration was not succesful!";
-			header("Location: http://www.itspixeled.nl/index.php?x=$error");
+			header("Location: /index.php?x=$error");
 			mysql_close(); # Close database connection
 			exit();
 		}
 		$error .= "Your registration was not succesful!";
-		header("Location: http://www.itspixeled.nl/index.php?x=$error");
+		header("Location: /index.php?x=$error");
 		mysql_close(); # Close database connection
 		exit();
 	}

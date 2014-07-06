@@ -52,9 +52,9 @@
 				
 				if ($_SESSION[active] == NULL)
 				{
-					header('Location: http://itspixeled.nl/login/mijnsnackit.php');
+					header('Location: /login/mijnsnackit.php');
 				} else {
-					header('Location: http://itspixeled.nl/login/activate.php');
+					header('Location: /login/activate.php');
 				}
 				mysql_close(); # Close database connection
 				exit();
@@ -66,19 +66,19 @@
 				
 			} else {	# No match was made
 				$error .= "De gebruikersnaam en/of het wachtwoord is fout!<br>";
-				header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
+				header("Location: /login/redirectlogin.php?x=$error");
 				mysql_close();
 				exit();
 			}		
 				
 		} else {	# No match was made
 			$error .= "De gebruikersnaam en/of het wachtwoord is fout!<br>";
-			header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
+			header("Location: /login/redirectlogin.php?x=$error");
 			mysql_close();
 			exit();
 		}
 		
-		header("Location: http://itspixeled.nl/login/redirectlogin.php?x=$error");
+		header("Location: /login/redirectlogin.php?x=$error");
 		mysql_close();
 		exit();
 	}

@@ -52,7 +52,7 @@
 				$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
 				if ($currenttoken[0] != $_SESSION[token_id])
 				{
-					header('Location: http://itspixeled.nl/login/logout.php');
+					header('Location: /login/logout.php');
 					mysql_close();
 					exit();
 				}
@@ -74,7 +74,7 @@
 				
 		session_regenerate_id();		
 	} # end of main IF
-	header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+	header("Location: /admininterface/adminindex.php?x=$error");
 	mysql_close();
 	exit();
 ?>

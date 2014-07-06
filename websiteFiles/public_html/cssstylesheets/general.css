@@ -15,7 +15,7 @@ body {
 	
 	#main{
 		width: 1000px;
-		height: 2000px;
+		min-height: 1000px;
 		margin-top: 10px;
 		margin-left: auto;
 		margin-right: auto;
@@ -153,7 +153,7 @@ body {
 	}
 	
 	#producttablerow:hover{
-		background: orange;
+		background: #d22b44;
 		cursor: pointer;
 	}
 	
@@ -172,6 +172,7 @@ body {
 		border-width: 1px;
 		border-color:#d22b44;
 		padding-left:30px;	
+		text-align: left;
 	}
 	
 	#productrighttd{
@@ -179,12 +180,14 @@ body {
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
-		border-color:#d22b44;	
+		border-color:#d22b44;
+		text-align: right;	
 	}
 	
 	#cardtable {
 		margin: 50px;
 		margin-left: 25px;
+		margin-bottom: 5px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;	
@@ -201,55 +204,82 @@ body {
 	}	
 	
 	#cardlefttd{
-		width: 175px;
+		width: 255px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
-		padding-left:30px;	
+		padding-left:30px;
+		text-align: left;	
 	}
 	
 	#cardcentretd{
-		width: 100px;
+		width: 60px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
-		border-color:#d22b44;	
+		border-color:#d22b44;
+		text-align: right;		
 	}	
 	
 	#cardrighttd{
-		width: 100px;
+		width: 60px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;	
+		text-align: right;
 	}	
 	
 	.cardlefttd{
-		width: 175px;
+		width: 255px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
 		padding-left:30px;	
+		text-align: left;
 	}
 	
 	.cardcentretd{
-		width: 100px;
+		width: 60px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
-		border-color:#d22b44;	
+		border-color:#d22b44;
+		text-align: right;		
 	}	
 	
 	.cardrighttd{
-		width: 100px;
+		width: 60px;
 		height: 30px;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;	
-	}	
+		text-align: right;
+	}
 
+	.clickbox {
+		background: none;
+		height: 30px;
+		width: 418px;
+		margin: 5px;
+		margin-right: 50px;
+		margin-left: 25px;
+		float: right;
+		background-color: #d22b44;
+		text-align: center;
+		font-weight: bold;
+		padding: 0;
+		border: none;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size: 13,5px;
+	}
+	
+	.clickbox:hover {
+		cursor: pointer;
+			
+	}
 	
 
 	a:link {text-decoration:none; color: #000; }

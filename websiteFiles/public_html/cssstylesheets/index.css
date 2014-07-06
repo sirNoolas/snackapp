@@ -7,6 +7,12 @@
 	h1 {
 		color: #d22b44;	
 	}
+
+	ul {
+		text-align: left;
+		margin: auto;
+		max-width: 500px;
+	}
 	
 	#error{
 		color: red;
@@ -30,8 +36,8 @@
 	header{
 		width: 998px;
 		height: 90px;
-     	margin: 0px;
-      padding: 0px;
+        	margin: 0px;
+       		padding: 0px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color:#fdfdfd;
@@ -44,6 +50,20 @@
 		background-repeat: no-repeat;
 		background-position:center center;
 		background-size: 890px 90px;
+	}
+	
+	#footer{
+		width: 1000px;
+		height: 40px;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #fbfbfb;
+		border-style: solid;
+		border-width: 1px;
+		border-color:#d22b44;
+		border-radius:25px;
+		text-align:center;
 	}
 	
 	#menu{
@@ -152,8 +172,8 @@
 		height: 600px;
 		width: 900px;
 		margin-top: 350px;
-		margin-left: 50;
-		margin-right: 50;
+		margin-left: auto;
+		margin-right: auto;
 		border-style: solid;
 		border-width: 1px;
 		border-color:#d22b44;
@@ -166,5 +186,5 @@
 	}
 	
 
-	a:link {text-decoration:none; color: #000; }
-	a:visited {text-decoration:none; color: #000;}
+	a:link {text-decoration:none; color: #d22b44; }
+	a:visited {text-decoration:none; color: #d22b44;}

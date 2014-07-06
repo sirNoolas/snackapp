@@ -7,53 +7,64 @@
 <?php
 	if (!isset($_SESSION[userid]))
 	{
-		header('Location: http://itspixeled.nl/login/redirectlogin.php');
+		header('Location: /login/redirectlogin.php');
 		exit();
 	} else if (isset($_SESSION[active])) {
 		if ($_SESSION[active] != NULL)
 		{
-			header('Location: http://itspixeled.nl/login/activate.php');
+			header('Location: /login/activate.php');
 			exit();
 		}
 	}
 	
 	if ($_SESSION['admin_value'] != 1)
 	{
-		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');	
+		header('Location:	/login/mijnsnackit.php');	
 		exit();
 	}
 ?>
-<!DOCTYE html>
+<?php
+	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	$names = array();
+	while ($namerow = mysql_fetch_array($result, MYSQL_NUM))
+	{
+		array_push($names, $namerow[0]);
+	}
+	mysql_free_result($result);
+?>
+<!DOCTYPE html>
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="../cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
-		<a href="../index.php"><header></header></a>
+		<a href="/index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitemselected" onclick="window.location = '../login/mijnsnackit.php';">
+  	     		<td id="menuitemselected" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/patat.php';">
-  	         		Patat
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=0';">
+  	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/snacks.php';">
-  	         		Snacks
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=1';">
+  	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/burgers.php';">
-  	         		Burgers
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=2';">
+  	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onclick="window.location = '../subpages/dranken.php';">
-  	         		Dranken
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=3';">
+  	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitem" onclick="window.location = '../login/logout.php';">
+  	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
   	         		Log uit 
   	         	</td>
   			</tr>
@@ -88,14 +99,15 @@
 							echo "<h3>Een rij verwijderen van het type: $type</h3>";
 							
 							echo 
-								('
-								<form margin="20px" action="adminactions/delrow.php?type=$type" method="post">					
+								("
+								<form margin='20px' action='adminactions/delrow.php?type=$type' method='post'>
+								" . '					
 								Naam: <input type="text" name="name" size="15" maxlength="30">
 								<br><br>
 								<br><br>
 								Admin wachtwoord: <input type="password" name="password" size="15" maxlength="20" value="Wachtwoord"/>
 								<br><br>
-								<input type="submit" name="submit_del" value="Toevoegen"/>
+								<input type="submit" name="submit_del" value="Verwijderen"/>
 								<input type="hidden" name="del_row" value="TRUE"/>
 								</form><br><br><br>
 							');
@@ -117,7 +129,7 @@
 								default:
 									$error.= "Dit soort rij word niet ondersteund!";
 									$type = FALSE;
-									header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+									header("Location: /admininterface/adminindex.php?x=$error");
 									mysql_close();
 									exit();
 							}
@@ -179,7 +191,7 @@
 								default:
 									$error.= "Dit soort rij word niet ondersteund!";
 									$type = FALSE;
-									header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+									header("Location: /admininterface/adminindex.php?x=$error");
 									mysql_close();
 									exit();
 							}
@@ -263,7 +275,7 @@
 							echo (
 								"<tr>
 									<td id=producttd> $row[0] </td>
-									<td id=producttd> $row[1] </td>
+									<td id=producttd> $row[3] </td>
 								</tr>"
 							);
 						}	
@@ -278,14 +290,14 @@
 						echo (
 							"<table id=producttable>
 					   		 <tr id=productfirstrow>
-					   		 	<td>Folder_id</td>
-						     	 	<td>PageId</td> 
+						     	 	<td>Basis_product_id</td> 
+						     	 	<td>Folder_id</td>
 						     	 	<td>Naam</td>                 	 	
 								</tr>"
 						);
 				
 						# query for data
-						$query0 = "SELECT * FROM basisproduct ORDER BY folder_id ASC";
+						$query0 = "SELECT * FROM basis_product ORDER BY folder_id ASC";
 						$result = mysql_query($query0) or trigger_error("Error while trying to access database");
 						# print data to screen
 						while($row = mysql_fetch_array($result))
@@ -293,8 +305,8 @@
 							echo (
 								"<tr>
 									<td id=producttd> $row[0] </td>
+									<td id=producttd> $row[1] </td>
 									<td id=producttd> $row[2] </td>
-									<td id=producttd> $row[3] </td>
 								</tr>"
 							);
 						}	
@@ -346,8 +358,11 @@
 			*
 			*/
 			?>
-      </div>
-		
+		</div>
+		<div id="footer">
+			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+		</div>
 	</body>
 	<?php
 		mysql_close();

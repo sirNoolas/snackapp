@@ -7,13 +7,13 @@
 <?php
 	if (!isset($_SESSION[userid]))
 	{
-		header('Location: http://itspixeled.nl/login/redirectlogin.php');
+		header('Location: /login/redirectlogin.php');
 		mysql_close();
 		exit();
 	} else if (isset($_SESSION[active])) {
 		if ($_SESSION[active] != NULL)
 		{
-			header('Location: http://itspixeled.nl/login/activate.php');
+			header('Location: /login/activate.php');
 			mysql_close();
 			exit();
 		}
@@ -21,10 +21,21 @@
 	
 	if ($_SESSION['admin_value'] != 1)
 	{
-		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');
+		header('Location:	/login/mijnsnackit.php');
 		mysql_close();	
 		exit();
 	}
+?>
+<?php
+	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	$names = array();
+	while ($namerow = mysql_fetch_array($result, MYSQL_NUM))
+	{
+		array_push($names, $namerow[0]);
+	}
+	mysql_free_result($result);
 ?>
 <?php
 	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
@@ -41,30 +52,30 @@
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="../cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
-		<a href="../index.php"><header></header></a>
+		<a href="/index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
   	     		<td id="menuitemselected" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/patat.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=0';">
   	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=1';">
   	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=2';">
   	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=3';">
   	         		<?php echo $names[3]; ?>
   	        	 </td>
   	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
@@ -122,13 +133,18 @@
 			?>
 			</div>
 
-			<div id="bodyrightdiv"><br /><b>Acties</b><br /><br />
-				<a href="actionadmin.php">Een tabel toevoegen</a><br />
-				<a href="actionadmin.php">Een tabel aanpassen</a><br />
-				<a href="actionadmin.php">Saldo van een gebruiker ophogen</a><br />
-				<a href="actionadmin.php">Een gebruiker verwijderen</a><br />
-				<a href="readorders.php">Bestellingen uitlezen</a>		
-            </div>
+			<div id="bodyrightdiv"><br /><b>System output</b><br /><br />
+					<div id="errordiv">
+					<?php
+						# Print provided error messages:
+						if (isset($_GET['x']))
+						{
+							$x = escape_data($_GET['x']);
+							echo "<br>$x";
+						}
+					?>
+				</div>	
+         </div>
 
 			<div id="bodyleftdiv"><br /><b>Transacties</b>
 				<?php 
@@ -136,7 +152,7 @@
 					echo (
 						"<table id=producttable>
                		<tr id=productfirstrow>
-                  	 	<td>ID</td>
+                  	 	<td> </td>
                   	 	<td>User ID</td>                  	 	
                   	   	<td>Datum</td>
                   		<td>Euro</td>							
@@ -166,21 +182,19 @@
 			?>
 			</div>
 
-			<div id="bodyrightdiv"><br /><b>System output</b><br /><br />
-				<div id="errordiv">
-					<?php
-						# Print provided error messages:
-						if (isset($_GET['x']))
-						{
-							$x = $_GET['x'];
-							echo "<br>$x";
-						}
-					?>
-				</div>
+			<div id="bodyrightdiv"><br /><b>Acties</b><br /><br />
+				<a href="actionadmin.php">Een tabel toevoegen</a><br />
+				<a href="actionadmin.php">Een tabel aanpassen</a><br />
+				<a href="actionadmin.php">Saldo van een gebruiker ophogen</a><br />
+				<a href="actionadmin.php">Een gebruiker verwijderen</a><br />
+				<a href="actionadmin.php">Bestellingen uitlezen</a>
 			</div>
         
-      </div>
-		
+		</div>
+		<div id="footer">
+			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+		</div>
 	</body>
 	<?php
 		mysql_close();

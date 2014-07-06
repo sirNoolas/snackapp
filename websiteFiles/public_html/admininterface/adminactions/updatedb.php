@@ -7,19 +7,19 @@
 <?php	
 	if (!isset($_SESSION[userid]))
 		{
-		header('Location: http://itspixeled.nl/login/redirectlogin.php');
+		header('Location: /login/redirectlogin.php');
 		exit();
 	} else if (isset($_SESSION[active])) {
 		if ($_SESSION[active] != NULL)
 			{
-			header('Location: http://itspixeled.nl/login/activate.php');
+			header('Location: /login/activate.php');
 			exit();
 		}
 	}
 	
 	if ($_SESSION['admin_value'] != 1)
 		{
-		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');	
+		header('Location:	/login/mijnsnackit.php');	
 		exit();
 	}
 ?>
@@ -32,7 +32,7 @@
 		$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
 		if ($currenttoken[0] != $_SESSION[token_id])
 			{
-			header('Location: http://itspixeled.nl/login/logout.php');
+			header('Location: /login/logout.php');
 			mysql_close();
 			exit();
 		}
@@ -53,7 +53,7 @@
 		$result = mysql_query($query4);
 		$_SESSION['token_id'] = $tokenId;
 		
-		header('Location: http://itspixeled.nl/admininterface/adminindex.php');
+		header('Location: /admininterface/adminindex.php');
 		
 		mysql_close();
 		exit();
@@ -106,7 +106,7 @@
 				$nid = FALSE;
 				$nn = FALSE;
 				$n = FALSE;
-				header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+				header("Location: /admininterface/adminindex.php?x=$error");
 				mysql_close();
 				exit();
 		}
@@ -210,14 +210,14 @@
 				
 				$error .= "succesful!<br>" . mysql_affected_rows() . " row was succesfully edited...";
 				
-				header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+				header("Location: /admininterface/adminindex.php?x=$error");
 			
 			} else {
 				$error .= "Your password was incorrect!!!";
-				header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");	
+				header("Location: /admininterface/adminindex.php?x=$error");	
 			} # END of AFFECTED_ROWS IF		
 		} else {
-			header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+			header("Location: /admininterface/adminindex.php?x=$error");
 		} # END of CHECK ALL VALUES 
 	} # END of MAIN IF
 	mysql_close();

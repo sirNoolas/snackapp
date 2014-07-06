@@ -1,52 +1,63 @@
 <?php
 	# initialize session and request cookies -> for keeping the user logged in everywhere on the website
 	session_start();
+	#open database connection
+	require_once("../../include/configdb.php");
 ?>
 <?php
 	if (isset($_SESSION[userid]) && isset($_SESSION[active]))
 	{
 		if ($_SESSION[active] == NULL) {
-			header('Location: http://itspixeled.nl/login/mijnsnackit.php');
+			header('Location: /login/mijnsnackit.php');
 			exit();
 		} else {
-			header('Location: http://itspixeled.nl/login/activate.php');
+			header('Location: /login/activate.php');
 			exit();
 		}
 	}
 ?>
-<!DOCTYE html>
+<?php
+	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	$names = array();
+	while ($namerow = mysql_fetch_array($result, MYSQL_NUM))
+	{
+		array_push($names, $namerow[0]);
+	}
+	mysql_free_result($result);
+?>
+<!DOCTYPE html>
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="./cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/general.css">
 	</head>
 	
 	<body>
-		<a href="../index.php"><header></header></a>
+		<a href="/index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
-  	     		<td id="menuitem" onClick="window.location = '/login/mijnsnackit.php';">
+  	     		<td id="menuitem" onClick="window.location = './mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '/subpages/patat.php';">
-  	         		Patat
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=0';">
+  	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '/subpages/snacks.php';">
-  	         		Snacks
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=1';">
+  	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '/subpages/burgers.php';">
-  	         		Burgers
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=2';">
+  	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '/subpages/dranken.php';">
-  	         		Dranken
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=3';">
+  	         		<?php echo $names[3]; ?>
   	        	 </td>
-  	         	<td id="menuitemselected" onClick="window.location = '../index.php';">
-  	               		Registreren
-  	         	</td>
+  	         	<td id="menuitem"></td>
   			</tr>
   		</table>
 		
@@ -73,6 +84,9 @@
 			</div>
 	
 		</div>
-
+		<div id="footer">
+			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+		</div>
 	</body>
 </html>

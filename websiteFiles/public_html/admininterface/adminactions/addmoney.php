@@ -4,13 +4,13 @@
 	# open database connection and extra security
 	require_once("../../../include/configdb.php");	
 	
-	DEFINE ('MAX_VALUE', 300);
+	DEFINE ('MAX_VALUE', 83);
 ?>
 <?php
 	if (isset($_POST['money_add'])) # Check whether the form has been submitted
 	{
 		# Check for valid email
-		if (!preg_match ('%^[A-Za-z0-9._\%-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$%', stripslashes(trim($_POST['email']))))
+		if (preg_match ('%^[A-Za-z0-9._\%-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$%', stripslashes(trim($_POST['email']))))
 		{
 			$e = escape_data($_POST['email']);
 			if ($e == $_SESSION[email])
@@ -42,7 +42,7 @@
 		}
 		
 		# Check for valid upgrade value
-		if (preg_match ('%^[0-9]+[.]{0,1}[0-9]{0,2}$%', stripslashes(trim($_POST['value']))))
+		if (preg_match ('%^-?[0-9]+[.]{0,1}[0-9]{0,2}$%', stripslashes(trim($_POST['value']))))
 		{
 			$value = (float) escape_data($_POST['value']);
 		} else {
@@ -61,7 +61,7 @@
 				$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
 				if ($currenttoken[0] != $_SESSION[token_id])
 				{
-					header('Location: http://itspixeled.nl/login/logout.php');
+					header('Location: /login/logout.php');
 					mysql_close();
 					exit();
 				}		
@@ -73,10 +73,11 @@
 					$row = mysql_fetch_array($result, MYSQL_NUM);
 					mysql_free_result($result);
 					$upgradeuser = $row[0];
-					$error .= "Attempting to write: " . $value . "euro, to the account of: " . $row[2] . " " . $row[3] . "<br>";
+					$error .= "Attempting to write: " . $value . " euro, to the account of: " . $row[2] . ", op naam van " . $row[4];
 					$currentvalue = (float) $row[6];
+					
 					# Check whether the value doesn't exceed the maximum
-					if($currentvalue + $value <= MAX_VALUE){
+					if($currentvalue + $value <= MAX_VALUE && $currentvalue + $value >= 0){
 					
 						# Write to transaction log
 						$query2 = "INSERT INTO transacties (transactie_id, user_id, datum, hoeveelheid, behandelaar_id) VALUES (NULL, '$upgradeuser', NULL, '$value', '$_SESSION[userid]')";
@@ -95,19 +96,19 @@
 							}
 											
 						} else {
-							$error .= "The transaction could not be saved to log! transaction canceled";
+							$error .= "De transactie kon niet opgeslagen worden! transactie geannuleerd";
 						} #end of write to log IF
 					} else {
-						$error .= "Your money exceeds the limits! You can't upgrade...<br>";
+						$error .= "Het bedrag dat u wilt opwaarderen valt buiten de gestelde limieten<br>";
 					} #end of Check for value doesn't exceed maximum.	
 				} else {
-					$error .= "The desired user could not be found.<br>";
+					$error .= "De gegeven gebruiker kon niet worden gevonden (let op -- hoofdlettergevoelig).<br>";
 				} # end of select user to upgrade IF				
 			} else {
-				$error .= "This password is not correct!<br>Please enter your own valid password!<br>";
+				$error .= "Dit wachtwoord is incorrect!<br>Voer alstublieft uw eigen valide wachtwoord in!<br>";
 			} # end of Check admin IF		
 		} else {
-			$error .= "The transaction was unsuccesful.";
+			$error .= "De transactie was onsuccesvol.";
 		} # End of secondary if
 		
 		# update second token
@@ -118,7 +119,7 @@
 				
 		session_regenerate_id();
 		
-		header("Location: http://itspixeled.nl/admininterface/adminindex.php?x=$error");
+		header("Location: /admininterface/adminindex.php?x=$error");
 		mysql_close();
 		exit();
 	}

@@ -7,19 +7,19 @@
 <?php
 	if (!isset($_SESSION[userid]))
 	{
-		header('Location: http://itspixeled.nl/login/redirectlogin.php');
+		header('Location: /login/redirectlogin.php');
 		exit();
 	} else if (isset($_SESSION[active])) {
 		if ($_SESSION[active] != NULL)
 		{
-			header('Location: http://itspixeled.nl/login/activate.php');
+			header('Location: /login/activate.php');
 			exit();
 		}
 	}
 	
 	if ($_SESSION['admin_value'] != 1)
 	{
-		header('Location:	http://www.itspixeled.nl/login/mijnsnackit.php');	
+		header('Location:	/login/mijnsnackit.php');	
 		exit();
 	}
 ?>
@@ -38,30 +38,30 @@
 <html lang="nl">
 
 	<head>
-		<link rel="shortcut icon" href="itspixeled.nl/cssstylesheets/logo.gif" />
+		<link rel="shortcut icon" href="/cssstylesheets/logo.gif" />
 		<meta charset="UTF-8">
 		<title>Xantes | Snack-IT</title>
 		<link rel="stylesheet" type="text/css" href="../cssstylesheets/admininterface.css">
 	</head>
 	
 	<body>
-		<a href="itspixeled.nl"><header></header></a>
+		<a href="/index.php"><header></header></a>
 		
 		<table id="menu">
   	 		<tr>
   	     		<td id="menuitemselected" onClick="window.location = '../login/mijnsnackit.php';">
   	         		Mijn Snack-IT
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/patat.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=0';">
   	         		<?php echo $names[0]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/snacks.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=1';">
   	         		<?php echo $names[1]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/burgers.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=2';">
   	         		<?php echo $names[2]; ?>
   	         	</td>
-  	         	<td id="menuitem" onClick="window.location = '../subpages/dranken.php';">
+  	         	<td id="menuitem" onClick="window.location = '../subpages/orderpage.php?id=3';">
   	         		<?php echo $names[3]; ?>
   	        	 </td>
   	         	<td id="menuitem" onClick="window.location = '../login/logout.php';">
@@ -92,8 +92,9 @@
 			Zorg alstublieft voor correct gebruik, en controleer altijd de ingevoerde gegevens!</p>
 		
 			<!-- upper left -->	
-			<div id="bodyleftdiv"><br /><b>Saldo van een gebruiker opwaarderen</b><br /><br />
-				<div id="internalleft">
+			<div id="bodyleftdiv"><br /><b>Saldo van een gebruiker opwaarderen</b><br />
+				Als u het saldo van iemand wilt verminderen kunt u een negatief getal invoer in het 'opwaarderen met' veld.
+				<div id="internalleft">					
 					<div id="hightext"><br>
 						E-mail: <br>
 						Voornaam: <br>
@@ -125,7 +126,7 @@
 					</tr>
 					<tr>
 						<td id=producttd> Page </td>
-						<td id=producttd><a href="edit.php?type=page">Wijzig</a> of <a href="add.php?type=page&request=remove">verwijder</a> rij</td>
+						<td id=producttd><a href="edit.php?type=page">Wijzig</a> rij</td>
 					</tr>
 					<tr>
 						<td id=producttd> Folder </td>
@@ -166,11 +167,19 @@
 			</div>
 
 			<!-- lower right -->
-			<div id="bodyrightdiv"><br /><b></b><br /><br />
+			<div id="bodyrightdiv"><br /><b>Bestellingen uitlezen</b><br /><br />
+				<a href="adminactions/readorders.php?display=all">Alle losse bestellingen op volgorde van tijd</a><br><br>
+				<a href="adminactions/readorders.php?display=user">De bestellingen sorteren per gebruiker</a><br><br>
+				<a href="adminactions/readorders.php?display=allsorted"><u>Alle dezelfde bestellingen op een regel zetten</u></a><br><br>
+				<p>
+					Deze optie geeft alle bestellingen die vandaag zijn gemaakt weer.</p>
 			</div>
         
-      </div>
-		
+		</div>
+		<div id="footer">
+			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+		</div>
 	</body>
 	<?php
 		mysql_close();

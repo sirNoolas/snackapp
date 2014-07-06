@@ -40,7 +40,7 @@
 	}
 	
 	# Check wether there are variables passed through the header
-	if (isset($_POST['add_row']) && isset($_GET['type']))
+	if (isset($_POST['del_row']) && isset($_GET['type']))
 	{
 		# Get the type of row we are dealing with
 		$type = escape_data($_GET['type']);
@@ -53,29 +53,6 @@
 			$n = FALSE;
 			$error .= "Voer alstublieft een correcte naam in bestaande uit letters, punten, streepjes, en spaties.<br>";
 		}		
-		
-		# Check for a valid id	
-		if (preg_match ('%^[0-9]+$%', stripslashes(trim($_POST['id']))))
-			{
-			$id = (int) escape_data($_POST['id']);
-		} else {	
-			$id = FALSE;
-			$error .= "Voer alstublieft een goed id in<br>";
-		}
-			
-		if (isset ($_POST['price']))
-			{
-			# Check for valid product price
-			if (preg_match ('%^[0-9]+[.]{0,1}[0-9]{0,2}$%', stripslashes(trim($_POST['price']))))
-					{
-				$value = (float) escape_data($_POST['price']);
-			} else {
-				$value = wrong;
-				$error .= "Voer alstublieft een valide waarde in! bijv. 1.23<br>";
-			}
-		} else {
-			$value = NULL;
-		}
 				
 		# Check for valid password
 		if (preg_match ('%^[A-Za-z0-9]{4,20}$%', stripslashes(trim($_POST['password']))))
@@ -91,26 +68,20 @@
 			{
 			case 'folder':
 				$type = folders;
-				$idtype = page_id;
 				$nametype = folder_naam;
 				break;
 			case 'base':
 				$type = basis_product;
-				$idtype = folder_id;
 				$nametype = basis_naam;
 				break;
 			case 'sub':
 				$type = sub_products;
-				$idtype = basis_product_id;
 				$nametype = sub_naam;
 				break;
 			default:
 				$error.= "Dit soort rij word niet ondersteund!";
 				$nametype = FALSE;
-				$idtype = FALSE;
-				$value = FALSE;
 				$type = FALSE;
-				$id = FALSE;
 				$n = FALSE;
 				header("Location: /admininterface/adminindex.php?x=$error");
 				mysql_close();
@@ -118,55 +89,25 @@
 		}
 		
 		# bring it all into practise
-		if ($p && $n && ($value || $value == NULL) && $nametype && $idtype && ($value != wrong))
+		if ($p && $n && $nametype)
 			{
 			$query1 = "SELECT * FROM users WHERE user_id = '$_SESSION[userid]' AND password = md5('$p')";
 			$result = mysql_query($query1) or trigger_error("Error while trying to access database<br>");
 			
 			if (mysql_affected_rows() == 1)
 				{
-				# Check for not in database
-				$checkquery = "SELECT * FROM $type WHERE $nametype = '$n'";
-				mysql_query($checkquery) or trigger_error("Error while trying to access database<br>");
+			
+				# Query
+				$query = "DELETE FROM $type WHERE $nametype = $n LIMIT 1";
+				$result = mysql_query($query) or trigger_error("Error while trying to access database<br>");
 				
-				if (mysql_affected_rows() == 0)
-					{
-					# Prepare custom query
-					$mainquery = "INSERT INTO $type ($nametype, $idtype";
-					
-					# Look vor value
-					if ($value != NULL) 
-						{
-						$mainquery .= ", prijs) VALUES ("; 
-					} else {
-						$mainquery .= ") VALUES (";
-					}
-					
-					# standard values
-					$mainquery .= "'$n', $id";
-					
-					# if value isset
-					if ($value != NULL) 
-						{
-						$value = (float) $value;
-						$mainquery .= ", $value)";
-					} else {
-						$mainquery .= ")";
-					}	
-					
-					#query
-					$result = mysql_query($mainquery) or trigger_error("Error while trying to access database<br>");
-					
-					# update second token
-					$tokenId = rand(10000, 9999999);
-					$query4 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
-					$result = mysql_query($query4);
-					$_SESSION['token_id'] = $tokenId;
-					
-					$error .= mysql_affected_rows() . " rijen zijn toegevoegd...";
-				} else {
-					$error .= "Dit product bestaat al!<br>";
-				}
+				# update second token
+				$tokenId = rand(10000, 9999999);
+				$query4 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
+				$result = mysql_query($query4);
+				$_SESSION['token_id'] = $tokenId;
+				
+				$error .= "succesvol!<br>" . mysql_affected_rows() . " De rij is succesvol verwijdert...";
 				
 				header("Location: /admininterface/adminindex.php?x=$error");
 			
