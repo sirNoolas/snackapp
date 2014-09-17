@@ -74,7 +74,7 @@
 			<div id="bodyleftdiv"><br /><b>Welkom, <?php echo $_SESSION[first_name]; ?></b>
 			<br />
 			<?php
-				echo "Uw saldo is: ";
+				echo "Uw saldo is: €";
 				echo $_SESSION[saldo];
 				if ($_SESSION[saldo] < 5)
 					{

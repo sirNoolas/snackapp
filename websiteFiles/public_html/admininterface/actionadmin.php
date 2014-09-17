@@ -167,18 +167,23 @@
 			</div>
 
 			<!-- lower right -->
-			<div id="bodyrightdiv"><br /><b>Bestellingen uitlezen</b><br /><br />
-				<a href="adminactions/readorders.php?display=all">Alle losse bestellingen op volgorde van tijd</a><br><br>
-				<a href="adminactions/readorders.php?display=user">De bestellingen sorteren per gebruiker</a><br><br>
-				<a href="adminactions/readorders.php?display=allsorted"><u>Alle dezelfde bestellingen op een regel zetten</u></a><br><br>
-				<p>
-					Deze optie geeft alle bestellingen die vandaag zijn gemaakt weer.</p>
+			<div id="bodyrightdiv"><br /><b>Bestellingen resetten</b><br /><br />
+				Deze functie verwijdert alle bestellingen uit de database. Dit geld dus voor zowel de orders van vandaag als welke andere order dan ook sinds de laatste reset.<br><br>
+				<div id="hightext">
+					Admin wachtwoord:
+				</div>
+				
+				<form margin="20px"  action="./adminactions/resetallorders.php" method="post">
+					<input type="password" name="password" size="15" maxlength="20" value="Wachtwoord"/><br>
+					<input type="submit" name="submit_rm" value="Resetten"/>
+					<input type="hidden" name="rm_orders" value="TRUE"/>
+				</form>
+				<br><b><u>LET OP</u>:<i> Deze actie is onomkeerbaar</i></b>
 			</div>
-        
 		</div>
 		<div id="footer">
 			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
 		</div>
 	</body>
 	<?php

@@ -100,6 +100,7 @@
 		
 		<div id="main">
 			<div id="bodyleftdiv"><br /><b>Tabellen openstellen</b><br />
+				<p>Als status een waarde geeft van 1, dan is de tabel open voor bestellingen van gebruikers. Is status 0 dan is de tabel dat niet.</p>
 				<?php 
 					#init table
 					echo (
@@ -182,18 +183,23 @@
 			?>
 			</div>
 
-			<div id="bodyrightdiv"><br /><b>Acties</b><br /><br />
-				<a href="actionadmin.php">Een tabel toevoegen</a><br />
-				<a href="actionadmin.php">Een tabel aanpassen</a><br />
-				<a href="actionadmin.php">Saldo van een gebruiker ophogen</a><br />
-				<a href="actionadmin.php">Een gebruiker verwijderen</a><br />
-				<a href="actionadmin.php">Bestellingen uitlezen</a>
+			<div id="bodyrightdiv"><br /><b>Bestellingen uitlezen</b><br /><br />
+				<span>
+					<a href="adminactions/readorders.php?display=all">Alle losse bestellingen op volgorde van tijd</a><br>
+					<a href="adminactions/readorders.php?display=user">De bestellingen sorteren per gebruiker</a><br><br>
+					<a href="adminactions/readorders.php?display=allsorted"><u>Alle dezelfde bestellingen op een regel zetten</u></a><br><br>
+					De bovenstaande drie acties geven alleen de bestellingen van vandaag.<br><br>
+				</span>
+				<span>
+					<a href="adminactions/readorders.php?display=allhistory">Alle losse bestellingen uit de geschiedenis</a><br><br>
+				</span>
+				
 			</div>
         
 		</div>
 		<div id="footer">
 			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
 		</div>
 	</body>
 	<?php

@@ -1,0 +1,113 @@
+.main {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	height: 2000px;
+	color: #ffffff;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.header {
+	margin: 0px;
+	width: 1000px;
+	height: 150px;
+}
+
+.logo {
+	margin: 0px;
+	background-image: url(logo.png);
+	width: 450px;
+	height: 150px;
+	background-repeat: no-repeat;
+	display: table-cell;
+}
+
+.menu {
+	width: 400px;
+	height: 150px;
+	display: table-cell;	
+}
+
+.menuitem {
+	width: 300px;
+	height: 33px;
+	margin-bottom: 6px;
+	background-color: #e40b39;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	text-align: center;
+	vertical-align: central;
+	font-weight: bold;
+}
+
+.menuitem:hover {
+	width: 400px;
+	cursor: pointer;
+}
+
+.
+
+.board {
+	height: 500 px;
+	width: 1000px;
+	margin-top: 30px;
+	background-color: #e40b39;
+}
+
+.boardleft {
+	width: 700px;
+	height: 400px;
+	float: left;
+	background-color: #e40b39;	
+	margin-top: 30px;
+}
+
+.boardimage {
+	width: 300px;
+	height: 400px;
+	float: right;
+	margin: 0px;
+	margin-top: 30px;
+}
+
+/*board text*/
+.welcome {
+	font-size: 40px;
+	font-weight: bold;
+	margin: 50px;	
+}
+
+.message {
+	font-size: 16px;
+	margin-left: 50px;
+	width: 600px;	
+}
+
+.login {
+	width: 100px;
+	height: 50 px;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #999;
+	border-width: 1px;
+	background-color: #C00;
+	float: right;
+	text-align: center;
+	margin: 20px;
+	margin-top: 50px;
+
+}
+
+.register {
+	width: 100px;
+	height: 200 px;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #999;
+	border-width: 1px;
+	background-color: #C00;
+	float: right;
+	text-align: center;
+	margin: 20px;
+	margin-top: 50px;
+}

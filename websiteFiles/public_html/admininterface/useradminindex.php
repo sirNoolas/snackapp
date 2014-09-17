@@ -181,13 +181,18 @@
 								<td id=producttd> $totalvalue </td>
 							</tr>"
 							);
-						
+							
+						# Close the table
+		      	  	echo "</table>";
 						mysql_free_result($orderresult);
 		      	  	mysql_free_result($productresult);
+		      	  	
+		      	  	echo "<a href='../subpages/resetcurorder.php'>Uw bestelling van vandaag annuleren</a><br><br>";
+		      	  	
 		      	  } else {
 		      	  		echo "Er is nog geen bestelling voor vandaag van u gevonden.";
+		      	  		echo "</table>";
 		      	  }
-		      	  echo "</table>";
 		      	  mysql_free_result($result);
 				?>
 			</div>
@@ -236,7 +241,7 @@
 		</div>
 		<div id="footer">
 			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
 		</div>
 	</body>
 </html>

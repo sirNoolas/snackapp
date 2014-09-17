@@ -5,7 +5,7 @@
 	require_once("../../../include/configdb.php");
 ?>
 <?php
-	# Check whether the user is logged in
+	# Security mesures
 	if (!isset($_SESSION[userid]))
 	{
 		header('Location: /login/redirectlogin.php');
@@ -14,9 +14,32 @@
 		if ($_SESSION[active] != NULL)
 		{
 			header('Location: /login/activate.php');
+			exit();
 		}
-	}			
+	}
+	
+	if ($_SESSION[admin_value] != 1) 
+	{
+		header('Location: /login/mijnsnackit.php');
+		exit();
+	}
+	
+	# Check for valid token
+	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	if (mysql_affected_rows() == 1) 
+		{	
+		$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
+		if ($currenttoken[0] != $_SESSION[token_id])
+			{
+			header('Location: /login/logout.php');
+			mysql_close();
+			exit();
+		}
+	}		
 ?>
+
 <?php
 	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
 	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
@@ -83,7 +106,7 @@
       		echo "<br>";
       		
       		# Fetch the display type
-				if (isset($_GET['display']) && preg_match ('%^(all|user|allsorted)?$%', stripslashes(trim($_GET['display']))))
+				if (isset($_GET['display']) && preg_match ('%^(all|user|allsorted|allhistory)?$%', stripslashes(trim($_GET['display']))))
 					{
 					$display = escape_data($_GET['display']);
 				} else {
@@ -273,8 +296,7 @@
 						
 							# Get the order id's and the user id's
 							$orderquery = "SELECT product_id, tijd FROM bestellingen_producten WHERE bestelling_id = $orderrow[0] ORDER BY product_id ASC";
-							echo $orderquery;
-							$orderresult = mysql_query($orderquery) or trigger_error("Error while trying to access database" . mysql_error());
+							$orderresult = mysql_query($orderquery) or trigger_error("Error while trying to access database");
 							
 							$first = TRUE;
 							$totalvalue = 0;
@@ -354,16 +376,101 @@
 						break;
 						# END of case allsorted
 						
+						
+						case 'allhistory':
+      				#Tell user
+      				echo "<h3>Alles ongesorteerd weergeven</h3>";
+      				
+		   			#init table
+						echo (
+							"<table id=producttable>
+		            		 <tr id=productfirstrow>
+						         <td>product omschrijving</td>                  	 	
+						         <td>prijs (euro)</td>
+						         <td>tijd van bestelling</td>
+								 </tr>"
+						);
+					
+						# Get the order id's and the user id's
+						$query = "SELECT bestelling_id, datum FROM bestellingen";
+						$result = mysql_query($query) or trigger_error("Error while trying to access database");
+						
+						while ($orderrow = mysql_fetch_array($result))
+							{
+							# Get the order id's and the user id's
+							$orderquery = "SELECT product_id, tijd FROM bestellingen_producten WHERE bestelling_id=$orderrow[0]";
+							$orderresult = mysql_query($orderquery) or trigger_error("Error while trying to access database");
+							
+							# print data to screen
+							while($orderproductrow = mysql_fetch_array($orderresult))
+								{
+								# Get product details
+								$productquery = "SELECT sub_naam, prijs FROM sub_products WHERE product_id = $orderproductrow[0]";
+								$productresult = mysql_query($productquery) or trigger_error("Error while trying to access database" . mysql_error());
+								# Check for one product returned
+								if (mysql_affected_rows() >= 1) 
+									{ 
+									$productrow = mysql_fetch_array($productresult); 
+									mysql_free_result($productresult);
+								}
+							
+								# Echo the result
+								echo ("
+									<tr>
+										<td id=producttd> $productrow[0] </td>
+										<td id=producttd> $productrow[1] </td>
+										<td id=producttd> $orderrow[1] $orderproductrow[1]</td>
+									</tr>"
+								);
+								
+								# Add product value to totalvalue
+								$totalvalue += (float) $productrow[1];
+								
+								
+							} # END of WHILE
+							if (mysql_affected_rows() > 0)
+								{
+								mysql_free_result($orderresult);
+							}
+						} # END of WHILE 2
+						
+						# Print total
+						if (mysql_affected_rows() > 0)
+							{
+							echo ("
+								<tr>
+									<td id=producttd> <b>TOTAAL bedrag</b> </td>
+									<td id=producttd> $totalvalue </td>
+								</tr>
+								<tr>
+									<td id=producttd> <b>TOTAAL aantal producten</b> </td>
+									<td id=producttd> $totalvalue </td>
+								</tr>
+							"); 
+						}
+						
+		         	echo "</table>";
+		         	
+		         	mysql_free_result($result);
+		         	break;
+		        	# END of case allhistory
+						
 					default:
 		        		echo " geen match";
 		        		break;
 				}	# END of SWITCH
+				
+				# update second token
+				$tokenId = rand(10000, 9999999);
+				$query4 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
+				$result = mysql_query($query4);
+				$_SESSION['token_id'] = $tokenId;
 			?>
 		</div>
 		<div id="footer">
 			<a href="../../disclaimer.php">Disclaimer</a> ----- <a href="../../sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
-		</div>s
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
+		</div>
 		
 	</body>
 </html>

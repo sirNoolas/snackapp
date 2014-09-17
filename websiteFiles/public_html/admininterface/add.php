@@ -22,6 +22,21 @@
 		header('Location:	/login/mijnsnackit.php');	
 		exit();
 	}
+	
+	# Check for valid token
+	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	if (mysql_affected_rows() == 1) 
+		{	
+		$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
+		if ($currenttoken[0] != $_SESSION[token_id])
+			{
+			header('Location: /login/logout.php');
+			mysql_close();
+			exit();
+		}
+	}
 ?>
 <?php
 	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
@@ -205,163 +220,165 @@
 						mysql_close();
 					} # END of main IF					
 				
+			
+					/* 
+					*
+					* START of ECHO currenttable 
+					*
+					* Display the table that will be edited			 
+					* Print the current table
+					*
+					*/
 				
+					echo "<h3>huidige tabel (haal hier je id uit)</h3>";
 				
-			
-			
-			
-				/* 
+					switch ($type) 
+						{
+						case 'pages':
+							#init table
+							echo 
+								("
+								<table id=producttable>
+									 <tr id=productfirstrow>
+			 						 	<td>PageId</td>
+			  						 	<td>Naam</td>                  	 	
+									</tr>"
+							);
+											
+							# query for data
+							$query0 = "SELECT * FROM pages ORDER BY page_id ASC";
+							$result = mysql_query($query0) or trigger_error("Error while trying to access database" . mysql_error());
+						
+							# print data to screen
+							while($row = mysql_fetch_array($result))
+								{
+								echo (
+									"<tr>
+										<td id=producttd> $row[0] </td>
+										<td id=producttd> $row[1] </td>
+									</tr>"
+								);
+							}	
+							echo "</table>";
+								
+							mysql_free_result($result);
+							break;
+							# END of CASE page
+					
+						case 'folders':
+							#init table
+							echo 
+								("
+								<table id=producttable>
+									 <tr id=productfirstrow>
+			 						 	<td>PageId</td>
+			  						 	<td>Naam</td>                  	 	
+									</tr>"
+							);
+											
+							# query for data
+							$query0 = "SELECT * FROM folders ORDER BY page_id ASC";
+							$result = mysql_query($query0) or trigger_error("Error while trying to access database" . mysql_error());
+						
+							# print data to screen
+							while($row = mysql_fetch_array($result))
+								{
+								echo (
+									"<tr>
+										<td id=producttd> $row[0] </td>
+										<td id=producttd> $row[3] </td>
+									</tr>"
+								);
+							}	
+							echo "</table>";
+								
+							mysql_free_result($result);
+							break;
+							# END of CASE page
+						
+						case 'basis_product':
+							#init table
+							echo (
+								"<table id=producttable>
+									 <tr id=productfirstrow>
+								  	 	<td>Basis_product_id</td> 
+								  	 	<td>Folder_id</td>
+								  	 	<td>Naam</td>                 	 	
+									</tr>"
+							);
+				
+							# query for data
+							$query0 = "SELECT * FROM basis_product ORDER BY folder_id ASC";
+							$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+							# print data to screen
+							while($row = mysql_fetch_array($result))
+								{
+								echo (
+									"<tr>
+										<td id=producttd> $row[0] </td>
+										<td id=producttd> $row[1] </td>
+										<td id=producttd> $row[2] </td>
+									</tr>"
+								);
+							}	
+							echo "</table>";
+								
+			 				mysql_free_result($result);
+							break;
+						# END of CASE folder
+						
+						case 'sub_products':
+							#init table
+							echo (
+								"<table id=producttable>
+									 <tr id=productfirstrow>
+									 	<td>Basis_product_Id</td> 
+									 	<td>Folder_id</td>								     	 	
+								  	 	<td>Naam</td>                 	 	
+									</tr>"
+							);
+				
+							# query for data
+							$query0 = "SELECT * FROM sub_products ORDER BY basis_product_id ASC";
+							$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+						
+							# print data to screen
+							while($row = mysql_fetch_array($result))
+								{
+								echo (
+									"<tr>
+										<td id=producttd> $row[0] </td>
+										<td id=producttd> $row[1] </td>
+										<td id=producttd> $row[2] </td>
+									</tr>"
+								);
+							}	
+							echo "</table>";
+								
+			 				mysql_free_result($result);
+							break;
+						# END of CASE base
+					
+						default:
+							echo "Dit bestaat niet!";
+					}
+		
+				/*
 				*
-				* START of ECHO currenttable 
-				*
-				* Display the table that will be edited			 
-				* Print the current table
+				* END of ECHO currenttable
 				*
 				*/
-				
-				echo "<h3>huidige tabel (haal hier je id uit)</h3>";
-				
-				switch ($type) 
-					{
-					case 'pages':
-						#init table
-						echo 
-							("
-							<table id=producttable>
-								 <tr id=productfirstrow>
-   	 						 	<td>PageId</td>
-   	  						 	<td>Naam</td>                  	 	
-								</tr>"
-						);
-											
-						# query for data
-						$query0 = "SELECT * FROM pages ORDER BY page_id ASC";
-						$result = mysql_query($query0) or trigger_error("Error while trying to access database" . mysql_error());
-						
-						# print data to screen
-						while($row = mysql_fetch_array($result))
-							{
-							echo (
-								"<tr>
-									<td id=producttd> $row[0] </td>
-									<td id=producttd> $row[1] </td>
-								</tr>"
-							);
-						}	
-					   echo "</table>";
-					   	
-					   mysql_free_result($result);
-						break;
-						# END of CASE page
-					
-					case 'folders':
-						#init table
-						echo 
-							("
-							<table id=producttable>
-								 <tr id=productfirstrow>
-   	 						 	<td>PageId</td>
-   	  						 	<td>Naam</td>                  	 	
-								</tr>"
-						);
-											
-						# query for data
-						$query0 = "SELECT * FROM folders ORDER BY page_id ASC";
-						$result = mysql_query($query0) or trigger_error("Error while trying to access database" . mysql_error());
-						
-						# print data to screen
-						while($row = mysql_fetch_array($result))
-							{
-							echo (
-								"<tr>
-									<td id=producttd> $row[0] </td>
-									<td id=producttd> $row[3] </td>
-								</tr>"
-							);
-						}	
-					   echo "</table>";
-					   	
-					   mysql_free_result($result);
-						break;
-						# END of CASE page
-						
-					case 'basis_product':
-						#init table
-						echo (
-							"<table id=producttable>
-					   		 <tr id=productfirstrow>
-						     	 	<td>Basis_product_id</td> 
-						     	 	<td>Folder_id</td>
-						     	 	<td>Naam</td>                 	 	
-								</tr>"
-						);
-				
-						# query for data
-						$query0 = "SELECT * FROM basis_product ORDER BY folder_id ASC";
-						$result = mysql_query($query0) or trigger_error("Error while trying to access database");
-						# print data to screen
-						while($row = mysql_fetch_array($result))
-							{
-							echo (
-								"<tr>
-									<td id=producttd> $row[0] </td>
-									<td id=producttd> $row[1] </td>
-									<td id=producttd> $row[2] </td>
-								</tr>"
-							);
-						}	
-					   echo "</table>";
-					   	
-		 				mysql_free_result($result);
-						break;
-					# END of CASE folder
-						
-					case 'sub_products':
-						#init table
-						echo (
-							"<table id=producttable>
-					   		 <tr id=productfirstrow>
-					   		 	<td>Basis_product_Id</td> 
-					   		 	<td>Folder_id</td>								     	 	
-						     	 	<td>Naam</td>                 	 	
-								</tr>"
-						);
-				
-						# query for data
-						$query0 = "SELECT * FROM sub_products ORDER BY basis_product_id ASC";
-						$result = mysql_query($query0) or trigger_error("Error while trying to access database");
-						
-						# print data to screen
-						while($row = mysql_fetch_array($result))
-							{
-							echo (
-								"<tr>
-									<td id=producttd> $row[0] </td>
-									<td id=producttd> $row[1] </td>
-									<td id=producttd> $row[2] </td>
-								</tr>"
-							);
-						}	
-					   echo "</table>";
-					   	
-		 				mysql_free_result($result);
-						break;
-					# END of CASE base
-					
-					default:
-						echo "Dit bestaat niet!";
-				}
-		
-			/*
-			*
-			* END of ECHO currenttable
-			*
-			*/
+			
+				# update second token
+				$tokenId = rand(10000, 9999999);
+				$query4 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
+				$result = mysql_query($query4);
+				$_SESSION['token_id'] = $tokenId;
 			?>
 		</div>
 		<div id="footer">
 			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
 		</div>
 	</body>
 	<?php

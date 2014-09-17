@@ -24,6 +24,7 @@
 	}
 ?>
 <?php
+	# Check for valid token
 	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
 	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
 	
@@ -66,7 +67,7 @@
 			$n = escape_data($_POST['name']);
 		} else {
 			$n = FALSE;
-			$error .= "please enter a valid name for the row you are editing<br>";
+			$error .= "please enter a valid name for the row you are editing. ";
 		}		
 		$type = escape_data($_GET['type']);
 		
@@ -117,7 +118,7 @@
 			$nn = escape_data($_POST['newname']);
 		} else if ($_POST['newname'] != NULL) {
 			$nn = FALSE;
-			$error .= "please enter a valid new name for the row<br>";
+			$error .= "please enter a valid new name for the row. ";
 		} else {
 			$nn = NULL;
 		}
@@ -128,9 +129,14 @@
 			if (preg_match ('%^[0-9]+$%', stripslashes(trim($_POST['newid']))))
 				{
 				$nid = (int) escape_data($_POST['newid']);
+				
+				if ($nid == 0)
+					{
+					$nid = 'zero';
+				}
 			} else if ($_POST['newid'] != NULL) {	
 				$nid = FALSE;
-				$error .= "please enter a valid new id for the row<br>";
+				$error .= "please enter a valid new id for the row. ";
 			} else {
 				$nid = NULL;
 			}
@@ -144,7 +150,7 @@
 					$value = (float) escape_data($_POST['newprice']);
 				} else if ($_POST['newprice'] != NULL) {
 					$value = FALSE;
-					$error .= "Please enter a valid monetary value! ex. 1.23<br>";
+					$error .= "Please enter a valid monetary value! ex. 1.23. ";
 				} else {
 					$value = NULL;
 				}
@@ -163,13 +169,13 @@
 			$p = escape_data($_POST['password']);
 		} else {
 			$p = FALSE;
-			$error .= "please enter a valid password!<br>";
+			$error .= "please enter a valid password!. ";
 		}
 		
 		if ($p && $n && ($nn || $nn == NULL) && ($nid || $nid == NULL) && ($value || $value == NULL) && ($idtype || $idtype == NULL) && $nametype)
 			{
 			$query1 = "SELECT * FROM users WHERE user_id = '$_SESSION[userid]' AND password = md5('$p')";
-			$result = mysql_query($query1) or trigger_error("Error while trying to access database<br>");
+			$result = mysql_query($query1) or trigger_error("Error while trying to access database");
 			
 			if (mysql_affected_rows() == 1)
 				{
@@ -187,8 +193,13 @@
 					}
 				}
 				if ($nid != NULL && $idtype != NULL) 
-					{ 
-					$mainquery .= "$idtype='$nid'";
+					{
+					if ($nid == 'zero')
+						{
+						$mainquery .= "$idtype=0";
+					} else {
+						$mainquery .= "$idtype=$nid";
+					}
 					if ($value != NULL)
 						{
 						$mainquery .= ", ";
@@ -198,9 +209,9 @@
 				}
 				if ($value != NULL) { $mainquery .= "prijs='$value' "; }			
 				$mainquery .= "WHERE $nametype='$n'";
-				
+
 				#query
-				$result = mysql_query($mainquery) or trigger_error("Error while trying to access database<br>" . mysql_error());
+				$result = mysql_query($mainquery) or trigger_error("Error while trying to access database" . mysql_error());
 				
 				# update second token
 				$tokenId = rand(10000, 9999999);
@@ -208,7 +219,7 @@
 				$result = mysql_query($query4);
 				$_SESSION['token_id'] = $tokenId;
 				
-				$error .= "succesful!<br>" . mysql_affected_rows() . " row was succesfully edited...";
+				$error .= "succesful! " . mysql_affected_rows() . " row was succesfully edited...";
 				
 				header("Location: /admininterface/adminindex.php?x=$error");
 			

@@ -16,7 +16,22 @@
 			header('Location: /login/activate.php');
 			exit();
 		}
-	}	
+	}
+	
+	# Check for valid token
+	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	if (mysql_affected_rows() == 1) 
+		{	
+		$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
+		if ($currenttoken[0] != $_SESSION[token_id])
+			{
+			header('Location: /login/logout.php');
+			mysql_close();
+			exit();
+		}
+	}
 ?>
 <?php 
 	# Check whether the form has been submitted
@@ -70,6 +85,9 @@
 				$error .= "U heeft een bestelling gedaan van: $totalorderprice euro<br>";
 				$error .= "Uw huidige saldo is: " . ($money + $totalorderprice) . " euro, en uw saldo mag niet beneden of op 0 komen!";
 			} else {
+				# Write to session
+				$_SESSION[saldo] = $money;				
+			
 				# UPDATE user money
 				$updatemoneyquery = "UPDATE users SET saldo=$money WHERE user_id=$_SESSION[userid]";
 				$updatemoneyresult = mysql_query($updatemoneyquery) or trigger_error("Error while trying to access database");
@@ -82,8 +100,8 @@
 		
 				if (mysql_affected_rows() == 0)
 					{
-					$mainorderquery = "INSERT INTO bestellingen (bestelling_id, datum, user_id) VALUES (NULL, CURDATE(), $_SESSION[userid]);";
-					$mainorderresult = mysql_query($mainorderquery) or trigger_error("Error while trying to access database");
+					$mainorderquery = "INSERT INTO bestellingen (bestelling_id, datum, user_id) VALUES (NULL, CURDATE(), $_SESSION[userid])";
+					$mainorderresult = mysql_query($mainorderquery) or trigger_error("Error while trying to access database" . mysql_error());
 			
 					#requery for order_id
 					$result = mysql_query($query) or trigger_error("Error while trying to access database");
@@ -109,7 +127,15 @@
 		# The call was invalid! redirect
 		$error .= "<br> Er was een foutieve vraag in order.php";
 		header("LOCATION: ../index.php?x=$error");
-	} # END of main IF	
+	} # END of main IF
+	
+	# update second token
+	$tokenId = rand(10000, 9999999);
+	$query4 = "UPDATE users SET token_id = $tokenId WHERE user_id = '$_SESSION[userid]'";
+	$result = mysql_query($query4);
+	$_SESSION['token_id'] = $tokenId;
+	
+	session_regenerate_id();
 ?>
 <?php
 	$query0 = "SELECT page_name FROM pages ORDER BY page_id ASC";
@@ -159,7 +185,11 @@
   			</tr>
   		</table>
   		<div id='main'>
-  			<?php echo "<br><br><br><h3>$error</h3><br><br>Let op! Wanneer u deze pagina herlaad, word uw order ook opnieuw verzonden!"; ?>
+  			<?php echo "<br><br><br><h3>$error</h3><br><br>Let op! Wanneer u deze pagina herlaad, word uw order ook opnieuw verzonden! <br><br>"; ?>
   		</div>
+		<div id="footer">
+			<a href="../disclaimer.php">Disclaimer</a> ----- <a href="../sitemap.php">Sitemap</a><br>
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
+		</div>
   	</body>
 </html>

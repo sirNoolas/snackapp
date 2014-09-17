@@ -62,7 +62,7 @@
 		</div>
 		<div id="footer">
 			<a href="./disclaimer.php">Disclaimer</a> ----- <a href="./sitemap.php">Sitemap</a><br>
-			© Rik Nijhuis, David Vonk, Geert ten Napel, Xantes ICT; 2014
+			© Rik Nijhuis, David Vonk, Geert ten Napel, Thijs Werkman, Xantes ICT; 2014
 		</div>
 	</body>
 </html>

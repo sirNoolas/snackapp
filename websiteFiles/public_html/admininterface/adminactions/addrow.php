@@ -22,9 +22,8 @@
 		header('Location:	/login/mijnsnackit.php');	
 		exit();
 	}
-?>
-<?php
-	# Check wether the session is valid through a random token
+	
+	# Check for valid token
 	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
 	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
 	
@@ -38,7 +37,8 @@
 			exit();
 		}
 	}
-	
+?>
+<?php	
 	# Check wether there are variables passed through the header
 	if (isset($_POST['add_row']) && isset($_GET['type']))
 	{

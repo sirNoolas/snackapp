@@ -7,6 +7,40 @@
 	DEFINE ('MAX_VALUE', 83);
 ?>
 <?php
+	if (!isset($_SESSION[userid]))
+	{
+		header('Location: /login/redirectlogin.php');
+		exit();
+	} else if (isset($_SESSION[active])) {
+		if ($_SESSION[active] != NULL)
+		{
+			header('Location: /login/activate.php');
+			exit();
+		}
+	}
+	
+	if ($_SESSION[admin_value] != 1) 
+	{
+		header('Location: /login/mijnsnackit.php');
+		exit();
+	}
+	
+	# Check for valid token
+	$query0 = "SELECT token_id FROM users WHERE user_id='$_SESSION[userid]'";
+	$result = mysql_query($query0) or trigger_error("Error while trying to access database");
+	
+	if (mysql_affected_rows() == 1) 
+		{	
+		$currenttoken = mysql_fetch_array($result, MYSQL_NUM);
+		if ($currenttoken[0] != $_SESSION[token_id])
+			{
+			header('Location: /login/logout.php');
+			mysql_close();
+			exit();
+		}
+	}		
+?>
+<?php
 	if (isset($_POST['money_add'])) # Check whether the form has been submitted
 	{
 		# Check for valid email
